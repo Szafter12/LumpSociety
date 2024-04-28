@@ -157,6 +157,7 @@ body {
 		padding: 0.5em 1em;
 		font-size: 2rem;
 		transition: color 0.3s;
+		color: $black-color;
 
 		&:hover {
 			color: $main-color;
@@ -460,7 +461,7 @@ body {
 		color: $white-color;
 		border: none;
 		border-radius: 8px;
-		
+
 		background-color: $main-color;
 		transition: background-color 0.3s;
 
@@ -481,10 +482,11 @@ body {
 		font-size: 2.4rem;
 	}
 
-	.success,.error {
+	.success,
+	.error {
 		display: flex;
 	}
-	
+
 	.success {
 		background-color: hsl(143, 83%, 55%);
 	}
