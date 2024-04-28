@@ -12,6 +12,12 @@
 	align-items: center;
 }
 
+h1 {
+	font-size: clamp(2.8rem, 3vw, 3.8rem);
+	margin-bottom: 0.5em;
+	text-align: center;
+}
+
 .white-block {
 	position: absolute;
 	top: 0;
@@ -62,7 +68,8 @@
 	transform: translateY(0);
 }
 
-.cart,.cart__body {
+.cart,
+.cart__body {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -71,11 +78,11 @@
 
 .cart {
 	width: 100%;
-	background-color: rgba(0,0,0,0.7);
+	background-color: rgba(0, 0, 0, 0.7);
 	z-index: 999;
 	transform: translateX(100%);
 	transition: transform 0.3s ease;
-	
+
 	&__body {
 		z-index: 1000;
 		width: 100%;
@@ -125,7 +132,6 @@
 	&__info {
 		text-align: center;
 		font-size: 1.6rem;
-
 	}
 
 	.section-title {
@@ -137,14 +143,12 @@
 	transform: translateX(0);
 }
 
-
-
 @media (min-width: 576px) {
-    .scroll-up {
-        right: 40px;
-        bottom: 40px;
+	.scroll-up {
+		right: 40px;
+		bottom: 40px;
 		padding: 1.5em;
-    }
+	}
 }
 
 @media (min-width: 768px) {

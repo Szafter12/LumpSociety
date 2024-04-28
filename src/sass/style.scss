@@ -327,11 +327,6 @@ body {
 	font-size: clamp(1.4rem, 3vw, 1.8rem);
 	text-align: center;
 
-	h1 {
-		font-size: clamp(2.8rem,3vw,3.8rem);
-		margin-bottom: 0.5em;
-	}
-
 	img {
 		width: 100%;
 		margin-top: 2em;
@@ -344,7 +339,7 @@ body {
 	position: relative;
 	background-color: $black-color;
 	color: $white-color;
-	font-size:clamp(1.4rem, 3vw, 1.6rem);
+	font-size: clamp(1.4rem, 3vw, 1.6rem);
 	overflow: hidden;
 
 	&__content {
@@ -359,7 +354,8 @@ body {
 		display: flex;
 		gap: 3em;
 
-		a,p {
+		a,
+		p {
 			padding: 0.3em 0.6em;
 		}
 	}
@@ -417,6 +413,84 @@ body {
 		a:hover {
 			color: $secondary-color;
 		}
+	}
+}
+
+// contact
+
+.contact {
+	position: relative;
+	background-color: $white-color;
+	font-size: clamp(1.4rem, 3vw, 1.6rem);
+
+	&__form-top,
+	&__form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+
+	&__form-label {
+		margin-bottom: 0.5em;
+		text-transform: uppercase;
+		align-self: flex-start;
+	}
+
+	&__form-input,
+	&__form-textarea {
+		margin-bottom: 2em;
+		padding: 0.6em 1.2em;
+		width: 100%;
+		background: none;
+		border-radius: 8px;
+		font-size: 1.6rem;
+		border: 1px solid $main-color;
+	}
+
+	&__form-textarea {
+		resize: vertical;
+		min-height: 300px;
+	}
+
+	&__form-btn {
+		align-self: flex-end;
+		padding: 1em 2em;
+		max-width: 300px;
+		color: $white-color;
+		border: none;
+		border-radius: 8px;
+		
+		background-color: $main-color;
+		transition: background-color 0.3s;
+
+		&:hover {
+			background-color: $secondary-color;
+		}
+	}
+
+	.msg-status {
+		position: absolute;
+		top: 50px;
+		display: none;
+		justify-content: center;
+		align-items: center;
+		padding: 30px;
+		width: 600px;
+		border-radius: 12px;
+		font-size: 2.4rem;
+	}
+
+	.success,.error {
+		display: flex;
+	}
+	
+	.success {
+		background-color: hsl(143, 83%, 55%);
+	}
+
+	.error {
+		background-color: hsl(9, 100%, 64%);
 	}
 }
 

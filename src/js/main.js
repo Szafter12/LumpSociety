@@ -8,6 +8,7 @@ const cartBtn = document.querySelector('.cart-btn')
 const closeCartBtn = document.querySelector('.close-btn')
 const cart = document.querySelector('.cart')
 
+
 const showMobile = () => {
 	navItems.classList.toggle('show-menu')
 }
@@ -43,6 +44,8 @@ const showCart = () => {
 const closeCart = () => {
 	cart.classList.remove('show-cart')
 }
+
+
 
 burgerBtn.addEventListener('click', showMobile)
 window.addEventListener('scroll', showScrollBox)
