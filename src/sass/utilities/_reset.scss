@@ -1,0 +1,43 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+img {
+	height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+	font-family: inherit;
+}
+
+button {
+	border: 1px solid transparent;
+    background: none;
+	cursor: pointer;
+}
+
+textarea {
+	resize: vertical;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}

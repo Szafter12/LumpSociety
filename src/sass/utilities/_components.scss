@@ -1,0 +1,156 @@
+@use './colors' as *;
+
+.wrapper {
+	max-width: 1400px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.white-block {
+	position: absolute;
+	top: 0;
+	right: -10%;
+	width: 50%;
+	height: 40px;
+	background-color: $white-color;
+	transform: skew(45deg);
+}
+
+.section-padding {
+	padding: 4em 2em;
+}
+
+.section-title {
+	text-align: center;
+	font-weight: bold;
+	font-size: clamp(2.2rem, 3vw, 2.8rem);
+
+	span {
+		background-color: $main-color;
+		padding: 0.5em;
+		color: $white-color;
+		border-bottom-right-radius: 12px;
+	}
+}
+
+.scroll-up {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	padding: 1em;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+	background-color: $secondary-color;
+	border-radius: 5px;
+	transform: translateY(300%);
+	transition: transform 0.3s;
+	z-index: 999;
+
+	i {
+		font-size: 1.4rem;
+		color: $white-color;
+		pointer-events: none;
+	}
+}
+
+.show-scrollBox {
+	transform: translateY(0);
+}
+
+.cart,.cart__body {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100vh;
+}
+
+.cart {
+	width: 100%;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 999;
+	transform: translateX(100%);
+	transition: transform 0.3s ease;
+	
+	&__body {
+		z-index: 1000;
+		width: 100%;
+		background-color: $black-color;
+		color: $white-color;
+	}
+
+	.close-btn {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 30px;
+		height: 30px;
+		padding: 3em;
+		z-index: 1000;
+
+		div {
+			position: absolute;
+			width: 60%;
+			height: 3px;
+			border-radius: 12px;
+			background-color: $white-color;
+			pointer-events: none;
+		}
+
+		.line1 {
+			rotate: 45deg;
+		}
+
+		.line2 {
+			rotate: -45deg;
+		}
+	}
+
+	&__inside {
+		height: 100%;
+	}
+
+	&__content {
+		margin-top: 4em;
+	}
+
+	&__info {
+		text-align: center;
+		font-size: 1.6rem;
+
+	}
+
+	.section-title {
+		color: $white-color;
+	}
+}
+
+.show-cart {
+	transform: translateX(0);
+}
+
+
+
+@media (min-width: 576px) {
+    .scroll-up {
+        right: 40px;
+        bottom: 40px;
+		padding: 1.5em;
+    }
+}
+
+@media (min-width: 768px) {
+	.cart {
+		&__body {
+			width: 600px;
+		}
+	}
+}

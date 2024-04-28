@@ -1,0 +1,60 @@
+@media (min-width: 576px) {
+	.newsletter-section {
+		padding: 4em 2em;
+	}
+
+	.newsletter {
+		border-radius: 12px;
+	}
+}
+
+@media (min-width: 768px) {
+	.nav {
+		&__items {
+			display: flex;
+			gap: 2em;
+			font-size: 1.8rem;
+			// font-weight: bold;
+		}
+
+		.burgerBtn {
+			display: none;
+		}
+	}
+
+	.new-items {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.footer {
+		&__content {
+			display: flex;
+			flex-direction: row;
+			gap: 0;
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.new-items {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.size-chart {
+		img {
+			width: 800px;
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.new-items {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.size-chart {
+		img {
+			width: 1000px;
+		}
+	}
+}
