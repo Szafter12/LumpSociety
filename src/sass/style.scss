@@ -420,7 +420,6 @@ body {
 // contact
 
 .contact {
-	position: relative;
 	background-color: $white-color;
 	font-size: clamp(1.4rem, 3vw, 1.6rem);
 
@@ -468,31 +467,6 @@ body {
 		&:hover {
 			background-color: $secondary-color;
 		}
-	}
-
-	.msg-status {
-		position: absolute;
-		top: 50px;
-		display: none;
-		justify-content: center;
-		align-items: center;
-		padding: 30px;
-		width: 600px;
-		border-radius: 12px;
-		font-size: 2.4rem;
-	}
-
-	.success,
-	.error {
-		display: flex;
-	}
-
-	.success {
-		background-color: hsl(143, 83%, 55%);
-	}
-
-	.error {
-		background-color: hsl(9, 100%, 64%);
 	}
 }
 

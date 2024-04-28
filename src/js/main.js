@@ -8,7 +8,6 @@ const cartBtn = document.querySelector('.cart-btn')
 const closeCartBtn = document.querySelector('.close-btn')
 const cart = document.querySelector('.cart')
 
-
 const showMobile = () => {
 	navItems.classList.toggle('show-menu')
 }
@@ -29,7 +28,7 @@ setInterval(() => {
 		info1.classList.add('hide')
 		info2.classList.remove('hide')
 	}
-}, 5000)
+}, 6000)
 
 const setYear = () => {
 	const currentDate = new Date()
@@ -44,8 +43,6 @@ const showCart = () => {
 const closeCart = () => {
 	cart.classList.remove('show-cart')
 }
-
-
 
 burgerBtn.addEventListener('click', showMobile)
 window.addEventListener('scroll', showScrollBox)
