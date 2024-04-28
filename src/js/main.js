@@ -1,6 +1,5 @@
 const burgerBtn = document.querySelector('.burgerBtn')
 const navItems = document.querySelector('.nav__items-mobile')
-const offertCarousel = document.querySelector('#offertCarousel')
 const scrollBox = document.querySelector('.scroll-up')
 const info1 = document.querySelector('.info1')
 const info2 = document.querySelector('.info2')
@@ -29,7 +28,7 @@ setInterval(() => {
 		info1.classList.add('hide')
 		info2.classList.remove('hide')
 	}
-}, 6000)
+}, 5000)
 
 const setYear = () => {
 	const currentDate = new Date()
