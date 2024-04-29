@@ -7,6 +7,7 @@ const year = document.querySelector('.year')
 const cartBtn = document.querySelector('.cart-btn')
 const closeCartBtn = document.querySelector('.close-btn')
 const cart = document.querySelector('.cart')
+const cartBody = document.querySelector('.cart__body')
 
 const showMobile = () => {
 	navItems.classList.toggle('show-menu')
@@ -38,10 +39,12 @@ const setYear = () => {
 
 const showCart = () => {
 	cart.classList.add('show-cart')
+	cartBody.classList.add('show-cartBody')
 }
 
 const closeCart = () => {
 	cart.classList.remove('show-cart')
+	cartBody.classList.remove('show-cartBody')
 }
 
 burgerBtn.addEventListener('click', showMobile)
