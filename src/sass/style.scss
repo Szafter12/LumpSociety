@@ -452,6 +452,29 @@ body {
 	}
 }
 
+// about-us
+
+.about-us {
+	flex-direction: column;
+	gap: 2em;
+	overflow: hidden;
+
+	.text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+		font-size: clamp(1.6rem, 3vw, 1.8rem);
+		transform: translate3d(0, -200%, 0);
+		animation: fadeIn 0.8s 0.4s ease-in-out forwards;
+	}
+
+	img {
+		width: 90%;
+		border-radius: 9px;
+		animation: fadeIn-reverse 0.8s ease-in-out;
+	}
+}
+
 // produkty
 
 .products {

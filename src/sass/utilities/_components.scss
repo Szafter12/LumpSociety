@@ -13,23 +13,7 @@
 	align-items: center;
 }
 
-.about-us {
-	flex-direction: row-reverse;
-	gap: 5em;
-	overflow: hidden;
 
-	p {
-		margin-bottom: 10em;
-		font-size: clamp(1.6rem, 3vw, 1.8rem);
-		transform: translate3d(150%,0,0);
-		animation: fadeIn 0.8s 0.4s ease-in-out forwards;
-	}
-
-	img {
-		border-radius: 9px;
-		animation: fadeIn-reverse 0.8s ease-in-out;
-	}
-}
 
 h1 {
 	font-size: clamp(3.8rem, 3vw, 4.2rem);

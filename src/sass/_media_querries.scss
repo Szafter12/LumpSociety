@@ -54,6 +54,23 @@
 			width: 800px;
 		}
 	}
+
+	.about-us {
+		flex-direction: row-reverse;
+		gap: 5em;
+
+		img {
+			width: 100%;
+		}
+	}
+}
+
+@media (min-width: 1050px) {
+	.about-us {
+		.text {
+			margin-bottom: 10em;
+		}
+	}
 }
 
 @media (min-width: 1200px) {
