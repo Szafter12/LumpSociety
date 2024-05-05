@@ -1,0 +1,17 @@
+@keyframes fadeIn {
+	to {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn-reverse {
+	from {
+		transform: translate3d(-100%, 0, 0);
+		opacity: 0;
+	}
+	to {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+}
