@@ -6,6 +6,15 @@
 	.newsletter {
 		border-radius: 12px;
 	}
+
+	.products {
+		flex-direction: row;
+		align-items: flex-start;
+
+		li {
+			display: block;
+		}
+	}
 }
 
 @media (min-width: 768px) {
