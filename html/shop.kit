@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta name="description" content="Wszystkie produkty dostępne w sklepie">
+    <title>All</title>
+    <!-- @include 'structure-head' -->
+</head>
+
+<body>
+
+   <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "lump_society";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Błąd połączenia: " . $conn->connect_error);
+    }
+    ?>
+
+    <!-- @include 'nav-header' -->
+
+     <?php
+
+    if (isset($_GET['category'])) {
+        $category = $_GET['category'];
+        echo "<h1 class='bold'>" . $category . "</h1>";
+    } else {
+        $category = 'all';
+        echo "<h1 class='bold'>" . $category . "</h1>";
+    }
+    ?>
+
+    <section class="products section-padding wrapper">
+        <ul class="products__category">
+            <li><a href="./shop.php" class="link">All</a></li>
+            <li><a href="./shop.php?category=tops" class="link">Tops</a></li>
+            <li><a href="./shop.php?category=bottoms" class="link">Bottoms</a></li>
+            <li><a href="./shop.php?category=accesories" class="link">Accesories</a></li>
+        </ul>
+        <div class="new-items">
+            <?php
+
+            if (isset($_GET['category'])) {
+                $category = $_GET['category'];
+            } else {
+
+                $category = 'all';
+            }
+
+            if ($category == 'all') {
+                $sql = "SELECT * FROM products";
+            } else {
+                $sql = "SELECT * FROM products WHERE category = '$category'";
+            }
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<a href='#' id='" . $row['product_id'] . "'>";
+                    echo "<div class='item'>";
+                    echo "<div class='item__top'>";
+                    echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
+                    echo "</div>";
+                    echo " <div class='item__bot'>";
+                    echo "<span class='item__name'>" . $row['name'] . "</span>";
+                    echo "<span class='item__price'>" . $row['price'] . "</span>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</a>";
+                }
+            } else {
+                echo "Brak produktów do wyświetlenia.";
+            }
+            ?>
+        </div>
+    </section>
+
+    <!-- @include 'footer' -->
+
+
+    <!-- @include 'structure-body' -->
+</body>
+
+</html>
