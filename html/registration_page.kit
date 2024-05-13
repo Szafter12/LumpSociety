@@ -17,11 +17,10 @@
     <section class="wrapper section-padding flex-center">
         <div class="login">
             <h1 class='bold'>Zarejestruj się</h1>
-            <form class="login_form">
-                <input type="email" class="login_input" placeholder="e-mail">
-                <input type="password" class="login_input" placeholder="hasło">
-                <input type="password" class="login_input" placeholder="powtórz hasło">
-                <button class="login_btn" type="submit" id="register-btn">Zarejestruj się</button>
+            <form action="php/addUser.php" method="post" class="login__form">
+                <input type="email" class="login__input" placeholder="e-mail" name="email">
+                <input type="password" class="login__input" placeholder="hasło" name="password">
+                <button class="login__btn" type="submit" id="registerBtn">Zarejestruj się</button>
             </form>
             <p class="info mt-5">Masz już konto?<a href="./login_page.html" class="link p-2"> Zaloguj się </a></p>
         </div>
