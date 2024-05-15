@@ -2,33 +2,24 @@
 <html lang="pl">
 
 <head>
-    <meta name="description" content="Wszystkie produkty dostępne w sklepie">
-    <title>All</title>
+    <meta name="description" content="Zaloguj się do swojego panelu urzytkownika">
+    <title>Panel Użytkownika</title>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Jakub Pachut">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/97392591bc.js" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="./dist/css/style.min.css"></head>
+<link rel="stylesheet" href="./dist/css/style.min.css">
+
+</head>
 
 <body>
-
-   <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "lump_society";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Błąd połączenia: " . $conn->connect_error);
-    }
-    ?>
 
     <div class="info flex-center">
     <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
@@ -47,20 +38,30 @@
             <div class="bars"></div>
         </button>
         <div class="nav__items-mobile">
-            <span><a href="./index.html" class="nav__item">Home</a></span>
+            <span><a href="./index.php" class="nav__item">Home</a></span>
             <span><a href="./shop.php" class="nav__item">Shop</a></span>
-            <span><a href="./size-chart.html" class="nav__item">Size Chart</a></span>
-            <span><a href="./contact.html" class="nav__item">Contact</a></span>
+            <span><a href="./size-chart.php" class="nav__item">Size Chart</a></span>
+            <span><a href="./contact.php" class="nav__item">Contact</a></span>
         </div>
     </div>
     <div class="nav__items">
-        <a href="./index.html" class="nav__item">Home</a>
+        <a href="./index.php" class="nav__item">Home</a>
         <a href="./shop.php" class="nav__item">Shop</a>
-        <a href="./size-chart.html" class="nav__item">Size Chart</a>
-        <a href="./contact.html" class="nav__item">Contact</a>
+        <a href="./size-chart.php" class="nav__item">Size Chart</a>
+        <a href="./contact.php" class="nav__item">Contact</a>
     </div>
     <div class="nav__ui">
-        <a href="./login_page.html" class="nav__btn login-btn"><i class="fa-solid fa-user"></i></a>
+        <?php
+session_start();
+
+if(isset($_SESSION['user_id'])) {
+    // Użytkownik jest zalogowany, wyświetl jego profil
+    echo "<a href='./user_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+} else {
+    // Użytkownik nie jest zalogowany, wyświetl formularz logowania
+    echo "<a href='./login_page.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+}
+?>
         <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
     </div>
 </nav>
@@ -81,59 +82,39 @@
         </div>
     </div>
 </div>
-     <?php
 
-    if (isset($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    } else {
-        $category = 'all';
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    }
-    ?>
 
-    <section class="products section-padding wrapper">
-        <ul class="products__category">
-            <li><a href="./shop.php" class="link">All</a></li>
-            <li><a href="./shop.php?category=tops" class="link">Tops</a></li>
-            <li><a href="./shop.php?category=bottoms" class="link">Bottoms</a></li>
-            <li><a href="./shop.php?category=accesories" class="link">Accesories</a></li>
-        </ul>
-        <div class="new-items">
+
+    <section class="wrapper section-padding flex-center">
+        <div class="user-panel flex-center">
             <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "lump_society";
 
-            if (isset($_GET['category'])) {
-                $category = $_GET['category'];
-            } else {
+            $conn = new mysqli($servername, $username, $password, $dbname);
 
-                $category = 'all';
-            }
+            // Sprawdzenie, czy sesja jest ustawiona dla użytkownika
+            if (isset($_SESSION['user_email'])) {
 
-            if ($category == 'all') {
-                $sql = "SELECT * FROM products";
-            } else {
-                $sql = "SELECT * FROM products WHERE category = '$category'";
-            }
-            $result = $conn->query($sql);
+                // Pobranie imienia użytkownika na podstawie danych sesji
+                $email = $_SESSION['user_email'];
+                $sql = "SELECT name FROM users WHERE email='$email'";
+                $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<a href='#' id='" . $row['product_id'] . "'>";
-                    echo "<div class='item'>";
-                    echo "<div class='item__top'>";
-                    echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
-                    echo "</div>";
-                    echo " <div class='item__bot'>";
-                    echo "<span class='item__name'>" . $row['name'] . "</span>";
-                    echo "<span class='item__price'>" . $row['price'] . "</span>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</a>";
+                if ($result->num_rows == 1) {
+                    // Wyświetlenie imienia użytkownika na stronie
+                    $row = $result->fetch_assoc();
+                    echo "<h1 class='bold'>Witaj " . $row["name"] . "</h1>";
+                } else {
+                    echo "<h1 class='bold'>Błąd podczas pobierania danych użytkownika.</h1>";
                 }
             } else {
-                echo "Brak produktów do wyświetlenia.";
+                header("location: login_page.php");
             }
             ?>
+            <a class="bold" href="php/logout.php">Wyloguj się</a>
         </div>
     </section>
 
@@ -142,16 +123,16 @@
         <div class="footer__links">
             <div class="brand">
                 <p class="footer__title">Marka:</p>
-                <a class="link" href="./about_us.html">About us</a>
-                <a class="link" href="./contact.html">Contact</a>
-                <a class="link" href="./sklepy.html">Sklepy</a>
-                <a class="link" href="./FAQ.html">FAQ</a>
+                <a class="link" href="./about_us.php">About us</a>
+                <a class="link" href="./contact.php">Contact</a>
+                <a class="link" href="./shops.php">Sklepy</a>
+                <a class="link" href="./FAQ.php">FAQ</a>
             </div>
             <div class="customer-service">
                 <p class="footer__title">Obsługa klienta:</p>
-                <a href="./polityka_prywatnosci.html" class="link">Polityka Prywatności</a>
-                <a href="./zwroty.html" class="link">Zwroty i reklamacje</a>
-                <a href="./wysylka.html" class="link">Wysyłka</a>
+                <a href="./pp.php" class="link">Polityka Prywatności</a>
+                <a href="./return.php" class="link">Zwroty i reklamacje</a>
+                <a href="./ship.php" class="link">Wysyłka</a>
             </div>
         </div>
         <div class="footer__socials">
@@ -173,6 +154,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
-<script src="./dist/js/main.min.js"></script></body>
+<script src="./dist/js/main.min.js"></script>
+</body>
 
 </html>

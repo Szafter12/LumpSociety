@@ -2,44 +2,23 @@
 <html lang="pl">
 
 <head>
-    <meta name="description" content="Wszystkie produkty dostępne w sklepie">
-    <?php
-
-    if (isset($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<title>" . $category . "</title>";
-    } else {
-        $category = 'all';
-        echo "<title>" . $category . "</title>";
-    }
-    ?>
+    <meta name="description" content="Lump society to polska marka odzieżowa zaprojektowana z myślą o naszych klientach">
+    <title>Lump Society - streetwear brand based in poland</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jakub Pachut">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/97392591bc.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./dist/css/style.min.css">
+
 </head>
 
 <body>
-
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "lump_society";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Błąd połączenia: " . $conn->connect_error);
-    }
-    ?>
 
     <div class="info flex-center">
         <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
@@ -102,61 +81,84 @@
             </div>
         </div>
     </div>
-    <?php
 
-    if (isset($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    } else {
-        $category = 'all';
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    }
-    ?>
-
-    <section class="products section-padding wrapper">
-        <ul class="products__category">
-            <li><a href="./shop.php" class="link">All</a></li>
-            <li><a href="./shop.php?category=tops" class="link">Tops</a></li>
-            <li><a href="./shop.php?category=bottoms" class="link">Bottoms</a></li>
-            <li><a href="./shop.php?category=accesories" class="link">Accesories</a></li>
-        </ul>
-        <div class="new-items">
-            <?php
-
-            if (isset($_GET['category'])) {
-                $category = $_GET['category'];
-            } else {
-
-                $category = 'all';
-            }
-
-            if ($category == 'all') {
-                $sql = "SELECT * FROM products";
-            } else {
-                $sql = "SELECT * FROM products WHERE category = '$category'";
-            }
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<a href='#' id='" . $row['product_id'] . "'>";
-                    echo "<div class='item'>";
-                    echo "<div class='item__top'>";
-                    echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
-                    echo "</div>";
-                    echo " <div class='item__bot'>";
-                    echo "<span class='item__name'>" . $row['name'] . "</span>";
-                    echo "<span class='item__price'>" . $row['price'] . " PLN</span>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</a>";
-                }
-            } else {
-                echo "Brak produktów do wyświetlenia.";
-            }
-            ?>
+    <section class="wrapper section-padding news">
+        <div id="offertCarousel" class="carousel slide " data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item carousel-item1 active ">
+                    <img src="./dist/img/main1.jpg" class="w-100" alt="informacje o nowościach">
+                </div>
+                <div class="carousel-item carousel-item2">
+                    <img src="./dist/img/main2.jpg" class="w-100" alt="informacje o nowościach">
+                </div>
+                <div class="carousel-item carousel-item3">
+                    <img src="./dist/img/main3.jpg" class="w-100" alt="informacje o nowościach">
+                </div>
+            </div>
         </div>
     </section>
+
+    <section class="section-padding wrapper just-droped">
+        <h2 class="section-title">Just <span>dropped</span></h2>
+        <div class="new-items">
+            <div class="item">
+                <div class="item__top">
+                    <span class="item__new">new</span>
+                    <img src="./dist/img/new-hoodie-black.png" alt="czarna bluza z nowej kolekcji" class="item__img">
+                </div>
+                <div class="item__bot">
+                    <span class="item__name">BASIC HOODIE (black)</span>
+                    <span class="item__price">499 PLN</span>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item__top">
+                    <span class="item__new">new</span>
+                    <img src="./dist/img/new-hoodie-blue.png" alt="niebieska bluza z nowej kolekcji" class="item__img">
+                </div>
+                <div class="item__bot">
+                    <span class="item__name">BASIC HOODIE (black)</span>
+                    <span class="item__price">499 PLN</span>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item__top">
+                    <span class="item__new">new</span>
+                    <img src="./dist/img/new-hoodie-grey.png" alt="szara bluza z nowej kolekcji" class="item__img">
+                </div>
+                <div class="item__bot">
+                    <span class="item__name">BASIC HOODIE (grey)</span>
+                    <span class="item__price">499 PLN</span>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item__top">
+                    <span class="item__new">new</span>
+                    <img src="./dist/img/new-hoodie-pink.png" alt="różowa bluza z nowej kolekcji" class="item__img">
+                </div>
+                <div class="item__bot">
+                    <span class="item__name">BASIC HOODIE (pink)</span>
+                    <span class="item__price">499 PLN</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section wrapper section-padding flex-center">
+        <div class="newsletter flex-center">
+            <p class="newsletter__info">Zapisz się do naszego newslettera i odbierz <span>-10%</span> na swoje pierwsze
+                zamówienie!</p>
+            <form class="newsletter__form flex-center">
+                <input type="text" name="name" placeholder="Imię" class="newsletter__input">
+                <input type="email" name="e-mail" placeholder="E-mail" class="newsletter__input">
+                <input type="submit" value="Zapisz mnie" class="newsletter__btn">
+            </form>
+            <a href="./pp.php" class="newsletter__polite">Polityka Prywatności</a>
+        </div>
+    </section>
+
+
+
 
     <footer class="footer section-padding">
         <div class="wrapper footer__content">
@@ -190,6 +192,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="./dist/js/main.min.js"></script>
+    <script src="./dist/js/carousel.min.js"></script>
 </body>
 
 </html>

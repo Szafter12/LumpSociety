@@ -36,20 +36,30 @@
             <div class="bars"></div>
         </button>
         <div class="nav__items-mobile">
-            <span><a href="./index.html" class="nav__item">Home</a></span>
+            <span><a href="./index.php" class="nav__item">Home</a></span>
             <span><a href="./shop.php" class="nav__item">Shop</a></span>
-            <span><a href="./size-chart.html" class="nav__item">Size Chart</a></span>
-            <span><a href="./contact.html" class="nav__item">Contact</a></span>
+            <span><a href="./size-chart.php" class="nav__item">Size Chart</a></span>
+            <span><a href="./contact.php" class="nav__item">Contact</a></span>
         </div>
     </div>
     <div class="nav__items">
-        <a href="./index.html" class="nav__item">Home</a>
+        <a href="./index.php" class="nav__item">Home</a>
         <a href="./shop.php" class="nav__item">Shop</a>
-        <a href="./size-chart.html" class="nav__item">Size Chart</a>
-        <a href="./contact.html" class="nav__item">Contact</a>
+        <a href="./size-chart.php" class="nav__item">Size Chart</a>
+        <a href="./contact.php" class="nav__item">Contact</a>
     </div>
     <div class="nav__ui">
-        <a href="./login_page.html" class="nav__btn login-btn"><i class="fa-solid fa-user"></i></a>
+        <?php
+session_start();
+
+if(isset($_SESSION['user_id'])) {
+    // Użytkownik jest zalogowany, wyświetl jego profil
+    echo "<a href='./user_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+} else {
+    // Użytkownik nie jest zalogowany, wyświetl formularz logowania
+    echo "<a href='./login_page.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+}
+?>
         <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
     </div>
 </nav>
@@ -73,16 +83,8 @@
 
 
 
-    <section class="wrapper section-padding flex-center">
-        <div class="login">
-            <h1 class='bold'>Zarejestruj się</h1>
-            <form action="php/addUser.php" method="post" class="login__form">
-                <input type="email" class="login__input" placeholder="e-mail" name="email">
-                <input type="password" class="login__input" placeholder="hasło" name="password">
-                <button class="login__btn" type="submit" id="registerBtn">Zarejestruj się</button>
-            </form>
-            <p class="info mt-5">Masz już konto?<a href="./login_page.html" class="link p-2"> Zaloguj się </a></p>
-        </div>
+    <section class="admin-panel wrapper section-padding flex-center">
+       
     </section>
 
     <footer class="footer section-padding">
@@ -90,16 +92,16 @@
         <div class="footer__links">
             <div class="brand">
                 <p class="footer__title">Marka:</p>
-                <a class="link" href="./about_us.html">About us</a>
-                <a class="link" href="./contact.html">Contact</a>
-                <a class="link" href="./sklepy.html">Sklepy</a>
-                <a class="link" href="./FAQ.html">FAQ</a>
+                <a class="link" href="./about_us.php">About us</a>
+                <a class="link" href="./contact.php">Contact</a>
+                <a class="link" href="./sklepy.php">Sklepy</a>
+                <a class="link" href="./FAQ.php">FAQ</a>
             </div>
             <div class="customer-service">
                 <p class="footer__title">Obsługa klienta:</p>
-                <a href="./polityka_prywatnosci.html" class="link">Polityka Prywatności</a>
-                <a href="./zwroty.html" class="link">Zwroty i reklamacje</a>
-                <a href="./wysylka.html" class="link">Wysyłka</a>
+                <a href="./polityka_prywatnosci.php" class="link">Polityka Prywatności</a>
+                <a href="./zwroty.php" class="link">Zwroty i reklamacje</a>
+                <a href="./wysylka.php" class="link">Wysyłka</a>
             </div>
         </div>
         <div class="footer__socials">

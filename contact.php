@@ -2,17 +2,8 @@
 <html lang="pl">
 
 <head>
-    <meta name="description" content="Wszystkie produkty dostępne w sklepie">
-    <?php
-
-    if (isset($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<title>" . $category . "</title>";
-    } else {
-        $category = 'all';
-        echo "<title>" . $category . "</title>";
-    }
-    ?>
+    <meta name="description" content="Strona kontaktowa naszej witryny, znajdziecie tu informacje o tym jak można nawiązać kontakt z firmą">
+    <title>Kontakt</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jakub Pachut">
@@ -24,22 +15,10 @@
     <script src="https://kit.fontawesome.com/97392591bc.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./dist/css/style.min.css">
+
 </head>
 
 <body>
-
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "lump_society";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Błąd połączenia: " . $conn->connect_error);
-    }
-    ?>
 
     <div class="info flex-center">
         <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
@@ -102,59 +81,31 @@
             </div>
         </div>
     </div>
-    <?php
 
-    if (isset($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    } else {
-        $category = 'all';
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    }
-    ?>
+    <h1 class="bold">Kontakt</h1>
+    <section class="contact section-padding">
+        <div class="wrapper">
+            <h2 class="section-title"><span>Formularz kontaktowy</span></h2>
+            <form action="php/mail.php" method="post" class="contact__form">
+                <div class="contact__form-top">
+                    <label for="name" class="contact__form-label">Imię</label>
+                    <input type="text" class="contact__form-input" name="name" id="name" required>
 
-    <section class="products section-padding wrapper">
-        <ul class="products__category">
-            <li><a href="./shop.php" class="link">All</a></li>
-            <li><a href="./shop.php?category=tops" class="link">Tops</a></li>
-            <li><a href="./shop.php?category=bottoms" class="link">Bottoms</a></li>
-            <li><a href="./shop.php?category=accesories" class="link">Accesories</a></li>
-        </ul>
-        <div class="new-items">
-            <?php
+                    <label for="email" class="contact__form-label">Adres e-mail</label>
+                    <input type="email" class="contact__form-input" name="email" required id="email">
+                </div>
 
-            if (isset($_GET['category'])) {
-                $category = $_GET['category'];
-            } else {
+                <label for="msg" class="contact__form-label">Wiadomość</label>
+                <textarea id="msg" class="contact__form-textarea" name="msg" required></textarea>
 
-                $category = 'all';
-            }
-
-            if ($category == 'all') {
-                $sql = "SELECT * FROM products";
-            } else {
-                $sql = "SELECT * FROM products WHERE category = '$category'";
-            }
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<a href='#' id='" . $row['product_id'] . "'>";
-                    echo "<div class='item'>";
-                    echo "<div class='item__top'>";
-                    echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
-                    echo "</div>";
-                    echo " <div class='item__bot'>";
-                    echo "<span class='item__name'>" . $row['name'] . "</span>";
-                    echo "<span class='item__price'>" . $row['price'] . " PLN</span>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</a>";
-                }
-            } else {
-                echo "Brak produktów do wyświetlenia.";
-            }
-            ?>
+                <button class="contact__form-btn">Wyślij</button>
+            </form>
+            <div class="contact__info">
+                <p>Skontaktować się z nami możesz również poprzez nasze social media lub wysyłając wiadomość
+                    bezpośrednio na jeden z naszych e-maili:</p>
+                <p><span class="bold">- store@lumpsociety.com </span>(obsługa klienta)</p>
+                <p><span class="bold">- contact@lumpsociety.com </span>(press/współprace)</p>
+            </div>
         </div>
     </section>
 
@@ -187,6 +138,7 @@
         </div>
         <div class="white-block"></div>
     </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="./dist/js/main.min.js"></script>

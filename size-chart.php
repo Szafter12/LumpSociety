@@ -3,10 +3,12 @@
 
 <head>
     <meta name="description" content="Wszystkie rozmiary naszych ubrań oraz rekomendacje dobioru rozmiaru">
-    <title>SIZE CHART</title>
+    <title>Size Chart</title>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Jakub Pachut">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
@@ -36,20 +38,30 @@
             <div class="bars"></div>
         </button>
         <div class="nav__items-mobile">
-            <span><a href="./index.html" class="nav__item">Home</a></span>
+            <span><a href="./index.php" class="nav__item">Home</a></span>
             <span><a href="./shop.php" class="nav__item">Shop</a></span>
-            <span><a href="./size-chart.html" class="nav__item">Size Chart</a></span>
-            <span><a href="./contact.html" class="nav__item">Contact</a></span>
+            <span><a href="./size-chart.php" class="nav__item">Size Chart</a></span>
+            <span><a href="./contact.php" class="nav__item">Contact</a></span>
         </div>
     </div>
     <div class="nav__items">
-        <a href="./index.html" class="nav__item">Home</a>
+        <a href="./index.php" class="nav__item">Home</a>
         <a href="./shop.php" class="nav__item">Shop</a>
-        <a href="./size-chart.html" class="nav__item">Size Chart</a>
-        <a href="./contact.html" class="nav__item">Contact</a>
+        <a href="./size-chart.php" class="nav__item">Size Chart</a>
+        <a href="./contact.php" class="nav__item">Contact</a>
     </div>
     <div class="nav__ui">
-        <a href="./login_page.html" class="nav__btn login-btn"><i class="fa-solid fa-user"></i></a>
+        <?php
+session_start();
+
+if(isset($_SESSION['user_id'])) {
+    // Użytkownik jest zalogowany, wyświetl jego profil
+    echo "<a href='./user_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+} else {
+    // Użytkownik nie jest zalogowany, wyświetl formularz logowania
+    echo "<a href='./login_page.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+}
+?>
         <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
     </div>
 </nav>
@@ -71,7 +83,7 @@
     </div>
 </div>
 
-    <h1 class="bold">Zwroty</h1>
+    <h1 class="bold">Size Chart</h1>
 
     <section class="size-chart wrapper section-padding flex-center">
         <p>Nasze produkty pasują do ponadwymiarowych rozmiarów.</p>
@@ -89,16 +101,16 @@
         <div class="footer__links">
             <div class="brand">
                 <p class="footer__title">Marka:</p>
-                <a class="link" href="./about_us.html">About us</a>
-                <a class="link" href="./contact.html">Contact</a>
-                <a class="link" href="./sklepy.html">Sklepy</a>
-                <a class="link" href="./FAQ.html">FAQ</a>
+                <a class="link" href="./about_us.php">About us</a>
+                <a class="link" href="./contact.php">Contact</a>
+                <a class="link" href="./shops.php">Sklepy</a>
+                <a class="link" href="./FAQ.php">FAQ</a>
             </div>
             <div class="customer-service">
                 <p class="footer__title">Obsługa klienta:</p>
-                <a href="./polityka_prywatnosci.html" class="link">Polityka Prywatności</a>
-                <a href="./zwroty.html" class="link">Zwroty i reklamacje</a>
-                <a href="./wysylka.html" class="link">Wysyłka</a>
+                <a href="./pp.php" class="link">Polityka Prywatności</a>
+                <a href="./return.php" class="link">Zwroty i reklamacje</a>
+                <a href="./ship.php" class="link">Wysyłka</a>
             </div>
         </div>
         <div class="footer__socials">

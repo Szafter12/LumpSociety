@@ -2,17 +2,8 @@
 <html lang="pl">
 
 <head>
-    <meta name="description" content="Wszystkie produkty dostępne w sklepie">
-    <?php
-
-    if (isset($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<title>" . $category . "</title>";
-    } else {
-        $category = 'all';
-        echo "<title>" . $category . "</title>";
-    }
-    ?>
+    <meta name="description" content="Zaloguj się do swojego panelu urzytkownika">
+    <title>Logowanie</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jakub Pachut">
@@ -24,22 +15,10 @@
     <script src="https://kit.fontawesome.com/97392591bc.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./dist/css/style.min.css">
+
 </head>
 
 <body>
-
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "lump_society";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Błąd połączenia: " . $conn->connect_error);
-    }
-    ?>
 
     <div class="info flex-center">
         <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
@@ -102,59 +81,19 @@
             </div>
         </div>
     </div>
-    <?php
 
-    if (isset($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    } else {
-        $category = 'all';
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    }
-    ?>
 
-    <section class="products section-padding wrapper">
-        <ul class="products__category">
-            <li><a href="./shop.php" class="link">All</a></li>
-            <li><a href="./shop.php?category=tops" class="link">Tops</a></li>
-            <li><a href="./shop.php?category=bottoms" class="link">Bottoms</a></li>
-            <li><a href="./shop.php?category=accesories" class="link">Accesories</a></li>
-        </ul>
-        <div class="new-items">
-            <?php
 
-            if (isset($_GET['category'])) {
-                $category = $_GET['category'];
-            } else {
-
-                $category = 'all';
-            }
-
-            if ($category == 'all') {
-                $sql = "SELECT * FROM products";
-            } else {
-                $sql = "SELECT * FROM products WHERE category = '$category'";
-            }
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<a href='#' id='" . $row['product_id'] . "'>";
-                    echo "<div class='item'>";
-                    echo "<div class='item__top'>";
-                    echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
-                    echo "</div>";
-                    echo " <div class='item__bot'>";
-                    echo "<span class='item__name'>" . $row['name'] . "</span>";
-                    echo "<span class='item__price'>" . $row['price'] . " PLN</span>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</a>";
-                }
-            } else {
-                echo "Brak produktów do wyświetlenia.";
-            }
-            ?>
+    <section class="wrapper section-padding flex-center">
+        <div class="login">
+            <h1 class='bold'>Zaloguj się</h1>
+            <form action="php/login.php" method="post" class="login__form">
+                <input type="email" class="login__input" placeholder="e-mail" name="email">
+                <input type="password" class="login__input" placeholder="hasło" name="password">
+                <button class="login__btn" type="submit">Zaloguj</button>
+            </form>
+            <p class="info mt-5">Nie masz konta? <a href="./registration_page.php" class="link p-2">Zarejestruj się
+                </a></p>
         </div>
     </section>
 

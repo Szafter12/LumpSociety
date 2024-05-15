@@ -2,17 +2,8 @@
 <html lang="pl">
 
 <head>
-    <meta name="description" content="Wszystkie produkty dostępne w sklepie">
-    <?php
-
-    if (isset($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<title>" . $category . "</title>";
-    } else {
-        $category = 'all';
-        echo "<title>" . $category . "</title>";
-    }
-    ?>
+    <meta name="description" content="Wszytsko o naszej firmie i założycielach">
+    <title>O nas</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jakub Pachut">
@@ -24,22 +15,10 @@
     <script src="https://kit.fontawesome.com/97392591bc.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./dist/css/style.min.css">
+
 </head>
 
 <body>
-
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "lump_society";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Błąd połączenia: " . $conn->connect_error);
-    }
-    ?>
 
     <div class="info flex-center">
         <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
@@ -71,17 +50,7 @@
             <a href="./contact.php" class="nav__item">Contact</a>
         </div>
         <div class="nav__ui">
-            <?php
-            session_start();
-
-            if (isset($_SESSION['user_id'])) {
-                // Użytkownik jest zalogowany, wyświetl jego profil
-                echo "<a href='./user_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
-            } else {
-                // Użytkownik nie jest zalogowany, wyświetl formularz logowania
-                echo "<a href='./login_page.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
-            }
-            ?>
+            <a href="./login_page.php" class="nav__btn login-btn"><i class="fa-solid fa-user"></i></a>
             <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
         </div>
     </nav>
@@ -102,60 +71,25 @@
             </div>
         </div>
     </div>
-    <?php
 
-    if (isset($_GET['category'])) {
-        $category = $_GET['category'];
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    } else {
-        $category = 'all';
-        echo "<h1 class='bold'>" . $category . "</h1>";
-    }
-    ?>
+    <h1 class="bold">About us</h1>
 
-    <section class="products section-padding wrapper">
-        <ul class="products__category">
-            <li><a href="./shop.php" class="link">All</a></li>
-            <li><a href="./shop.php?category=tops" class="link">Tops</a></li>
-            <li><a href="./shop.php?category=bottoms" class="link">Bottoms</a></li>
-            <li><a href="./shop.php?category=accesories" class="link">Accesories</a></li>
-        </ul>
-        <div class="new-items">
-            <?php
-
-            if (isset($_GET['category'])) {
-                $category = $_GET['category'];
-            } else {
-
-                $category = 'all';
-            }
-
-            if ($category == 'all') {
-                $sql = "SELECT * FROM products";
-            } else {
-                $sql = "SELECT * FROM products WHERE category = '$category'";
-            }
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<a href='#' id='" . $row['product_id'] . "'>";
-                    echo "<div class='item'>";
-                    echo "<div class='item__top'>";
-                    echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
-                    echo "</div>";
-                    echo " <div class='item__bot'>";
-                    echo "<span class='item__name'>" . $row['name'] . "</span>";
-                    echo "<span class='item__price'>" . $row['price'] . " PLN</span>";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</a>";
-                }
-            } else {
-                echo "Brak produktów do wyświetlenia.";
-            }
-            ?>
+    <section class="about-us wrapper section-padding flex-center">
+        <div class="text">
+            <p>
+                "Witaj w Lumpsociety - Twoim ulubionym miejscu na zakupy! Jesteśmy pasjonatami mody, którzy nie boją się
+                wyrażać siebie poprzez ubrania. Nasza misja to zapewnienie Tobie wyjątkowych, wysokiej jakości ubrań,
+                które
+                podkreślą Twój indywidualny styl i sprawią, że będziesz czuć się pewnie każdego dnia.
+            </p>
+            <p>
+                W Lumpsociety wierzymy
+                w różnorodność i inkluzję, dlatego nasze kolekcje są dedykowane wszystkim, niezależnie od wieku, płci
+                czy
+                rozmiaru. Dołącz do społeczności Lumpsociety i odkryj swoją modową osobowość już dziś!"
+            </p>
         </div>
+        <img src="./dist/img/about-us.jpg" alt="zdjecie założycieli lumpsociety">
     </section>
 
     <footer class="footer section-padding">
