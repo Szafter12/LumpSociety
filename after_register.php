@@ -2,8 +2,8 @@
 <html lang="pl">
 
 <head>
-    <meta name="description" content="Zaloguj się do swojego panelu urzytkownika">
-    <title>Logowanie</title>
+    <meta name="description" content="Rejestracja została pomyślnie zakończona">
+    <title>Rejestracja</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jakub Pachut">
@@ -50,17 +50,7 @@
             <a href="./contact.php" class="nav__item">Contact</a>
         </div>
         <div class="nav__ui">
-            <?php
-            session_start();
-
-            if (isset($_SESSION['user_id'])) {
-                // Użytkownik jest zalogowany, wyświetl jego profil
-                echo "<a href='./user_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
-            } else {
-                // Użytkownik nie jest zalogowany, wyświetl formularz logowania
-                echo "<a href='./login_page.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
-            }
-            ?>
+            <a href="./login_page.php" class="nav__btn login-btn"><i class="fa-solid fa-user"></i></a>
             <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
         </div>
     </nav>
@@ -82,19 +72,12 @@
         </div>
     </div>
 
-
-
-    <section class="wrapper section-padding flex-center">
-        <div class="login">
-            <h1 class='bold'>Zaloguj się</h1>
-            <form action="php/login.php" method="post" class="login__form">
-                <input type="email" class="login__input" placeholder="e-mail" name="email" required>
-                <input type="password" class="login__input" placeholder="hasło" name="password" required>
-                <button class="login__btn" type="submit">Zaloguj</button>
-            </form>
-            <p class="info mt-5">Nie masz konta? <a href="./registration_page.php" class="link p-2">Zarejestruj się
-                </a></p>
+    <section class="after-register wrapper section-padding flex-center">
+        <div class="after-register__info flex-center">
+            <h1>Użytkownik został pomyślnie zarejestrowany</h1>
+            <a class="link" href="./login_page.php">Zaloguj się</a>
         </div>
+        <img src="./dist/img/piotrek.png" alt="Piotr Ładyga">
     </section>
 
     <footer class="footer section-padding">

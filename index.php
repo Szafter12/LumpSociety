@@ -108,7 +108,7 @@
                 </div>
                 <div class="item__bot">
                     <span class="item__name">BASIC HOODIE (black)</span>
-                    <span class="item__price">499 PLN</span>
+                    <span class="bold">499 PLN</span>
                 </div>
             </a>
             <a class="item" href='product.php?product_id=7'>
@@ -118,7 +118,7 @@
                 </div>
                 <div class="item__bot">
                     <span class="item__name">BASIC HOODIE (blue)</span>
-                    <span class="item__price">499 PLN</span>
+                    <span class="bold">499 PLN</span>
                 </div>
             </a>
             <a class="item" href='product.php?product_id=10'>
@@ -128,7 +128,7 @@
                 </div>
                 <div class="item__bot">
                     <span class="item__name">BASIC HOODIE (grey)</span>
-                    <span class="item__price">499 PLN</span>
+                    <span class="bold">499 PLN</span>
                 </div>
             </a>
             <a class="item" href='product.php?product_id=3'>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="item__bot">
                     <span class="item__name">BASIC HOODIE (pink)</span>
-                    <span class="item__price">499 PLN</span>
+                    <span class="bold">499 PLN</span>
                 </div>
             </a>
     </section>

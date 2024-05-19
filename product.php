@@ -114,7 +114,7 @@ if (isset($_GET['product_id'])) {
             echo "<div class='product-page__info'>";
             echo "<h1 class='product-page__name'>" . $name . "</h1>";
             echo "<p class='product-page__quantiti'>" . $stock_quantity . " sztuk w magazynie</p>";
-            echo "<p>Cena:" . $price . "PLN</p>";
+            echo "<p>Cena: <span class='bold'>" . $price . "PLN</span></p>";
             echo "<button class='product-page__btn'>Dodaj do koszyka</button>";
             echo "</div>";
             echo "</div>";

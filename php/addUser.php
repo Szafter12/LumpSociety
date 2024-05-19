@@ -10,6 +10,7 @@ if ($conn->connect_error) {
     die("Błąd połączenia: " . $conn->connect_error);
 }
 
+$name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -18,9 +19,9 @@ $password = mysqli_real_escape_string($conn, $password);
 
 $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO `users`(`email`, `password`) VALUES ('$email','$password_hashed')";
+$sql = "INSERT INTO `users`(`name`, `email`, `password`) VALUES ('$name', '$email','$password_hashed')";
 if ($conn->query($sql) === TRUE) {
-    echo "Użytkownik został pomyślnie zarejestrowany.";
+    header("Location: ../after_register.php");
 } else {
     echo "Błąd podczas rejestracji użytkownika: " . $conn->error;
 }

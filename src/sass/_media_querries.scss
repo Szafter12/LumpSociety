@@ -57,7 +57,7 @@
 		&__info {
 			align-self: flex-start;
 		}
-		
+
 		&__img {
 			width: auto;
 			height: 500px;
@@ -106,6 +106,20 @@
 	.size-chart {
 		img {
 			width: 1000px;
+		}
+	}
+}
+
+@media (min-width: 1330px) {
+	.products {
+		.new-items {
+			.item {
+				&__top {
+					img {
+						height: 250px;
+					}
+				}
+			}
 		}
 	}
 }
