@@ -50,7 +50,18 @@
             <a href="./contact.php" class="nav__item">Contact</a>
         </div>
         <div class="nav__ui">
-            <a href="./login_page.php" class="nav__btn login-btn"><i class="fa-solid fa-user"></i></a>
+            <?php
+            session_start();
+            if (isset($_SESSION['user_id']) && isset($_SESSION['is_admin'])) {
+                echo "<a href='./admin_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+            } else if (isset($_SESSION['user_id'])) {
+                // Użytkownik jest zalogowany, wyświetl jego profil
+                echo "<a href='./user_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+            } else {
+                // Użytkownik nie jest zalogowany, wyświetl formularz logowania
+                echo "<a href='./login_page.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+            }
+            ?>
             <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
         </div>
     </nav>

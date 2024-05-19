@@ -78,8 +78,9 @@ if (isset($_GET['product_id'])) {
         <div class="nav__ui">
             <?php
             session_start();
-
-            if (isset($_SESSION['user_id'])) {
+            if (isset($_SESSION['user_id']) && isset($_SESSION['is_admin'])) {
+                echo "<a href='./admin_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
+            } else if (isset($_SESSION['user_id'])) {
                 // Użytkownik jest zalogowany, wyświetl jego profil
                 echo "<a href='./user_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
             } else {

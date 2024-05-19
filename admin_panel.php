@@ -2,8 +2,8 @@
 <html lang="pl">
 
 <head>
-    <meta name="description" content="Rejestracja została pomyślnie zakończona">
-    <title>Rejestracja</title>
+    <meta name="description" content="Zaloguj się do swojego panelu urzytkownika">
+    <title>Panel Admina</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jakub Pachut">
@@ -19,7 +19,6 @@
 </head>
 
 <body>
-
     <div class="info flex-center">
         <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
         <p class="info2">Zamów do 13:00, a Twoje zamówienie zostanie dostarczone w następny dzień roboczy 🚚</p>
@@ -50,7 +49,7 @@
             <a href="./contact.php" class="nav__item">Contact</a>
         </div>
         <div class="nav__ui">
-            <?php
+        <?php
             session_start();
             if (isset($_SESSION['user_id']) && isset($_SESSION['is_admin'])) {
                 echo "<a href='./admin_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
@@ -83,12 +82,56 @@
         </div>
     </div>
 
-    <section class="after-register wrapper section-padding flex-center">
-        <div class="after-register__info flex-center">
-            <h1>Użytkownik został pomyślnie zarejestrowany</h1>
-            <a class="link" href="./login_page.php">Zaloguj się</a>
+
+
+    <section class="wrapper section-padding flex-center">
+        <div class="user-panel flex-center">
+            <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "lump_society";
+
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Sprawdzenie, czy sesja jest ustawiona dla użytkownika
+            if (isset($_SESSION['user_email']) && ($_SESSION['is_admin'] == 1)) {
+
+                // Pobranie imienia użytkownika na podstawie danych sesji
+                $email = $_SESSION['user_email'];
+                $sql = "SELECT name FROM users WHERE email='$email'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows == 1) {
+                    // Wyświetlenie imienia użytkownika na stronie
+                    $row = $result->fetch_assoc();
+                    echo "<h1 class='bold'>Witaj " . $row["name"] . "</h1>";
+                    echo <<<form
+                    <h2 class="section-title">Dodaj Produkt</h2>
+                    <form action="php/admin.php" method="get" class="login__form">
+                    <input type="text" class="login__input" placeholder="name" name="name" required>
+                    <input type="text" class="login__input" placeholder="price" name="price" required>
+                    <input type="text" class="login__input" placeholder="photo url" name="photo_url" required>
+                    <input type="text" class="login__input" placeholder="photo alt" name="photo_alt" required>
+                    <input type="number" class="login__input" placeholder="stock_quantity" name="stock_quantity" required>
+                    <label for="category">Wybierz kategorie:</label>
+                    <select id="category" name="category">
+                    <option value="tops">tops</option>
+                    <option value="bottoms">bottoms</option>
+                    <option value="accesories">accesories</option>
+                    </select>
+                    <button class="login__btn" type="submit" name="mode" value="dodaj">Dodaj</button>
+                    </form>
+                    form;
+                } else {
+                    echo "<h1 class='bold'>Błąd podczas pobierania danych użytkownika.</h1>";
+                }
+            } else {
+                header("location: login_page.php");
+            }
+            ?>
+            <a class="bold" href="php/logout.php">Wyloguj się</a>
         </div>
-        <img src="./dist/img/piotrek.png" alt="Piotr Ładyga">
     </section>
 
     <footer class="footer section-padding">

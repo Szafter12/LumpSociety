@@ -27,12 +27,16 @@ $result = $conn->query($sql);
 
 if ($result->num_rows == 1) {
     $row = $result->fetch_assoc();
-    // Sprawdź poprawność hasła
     if (password_verify($_POST['password'], $row['password'])) {
-        // Ustaw sesję użytkownika
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['user_email'] = $row['email'];
-        header("Location: ../user_panel.php"); 
+        $_SESSION['is_admin'] = $row['is_admin'];
+
+        if ($row['is_admin'] == 1) {
+            header("Location: ../admin_panel.php");
+        } else {
+            header("Location: ../user_panel.php");
+        }
     } else {
         echo "Nieprawidłowe hasło.";
     }
