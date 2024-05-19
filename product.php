@@ -1,14 +1,41 @@
+<?php
+if (isset($_GET['product_id'])) {
+    $id = $_GET['product_id'];
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "lump_society";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT name, price, photo_url, photo_alt, stock_quantity  FROM products WHERE product_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->bind_result($name, $price, $photo_url, $photo_alt, $stock_quantity);
+    $stmt->fetch();
+    $stmt->close();
+    $conn->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="pl">
 
 <head>
     <meta name="description" content="Lump society to polska marka odzieżowa zaprojektowana z myślą o naszych klientach">
-    <title>Lump Society - streetwear brand based in poland</title>
+    <?php
+    echo "<title>" . $name . "</title>";
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jakub Pachut">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
@@ -19,7 +46,6 @@
 </head>
 
 <body>
-
     <div class="info flex-center">
         <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
         <p class="info2">Zamów do 13:00, a Twoje zamówienie zostanie dostarczone w następny dzień roboczy 🚚</p>
@@ -62,7 +88,6 @@
             }
             ?>
             <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
-        </div>
     </nav>
     <button class="scroll-up flex-center">
         <i class="fa-solid fa-chevron-up"></i>
@@ -82,82 +107,19 @@
         </div>
     </div>
 
-    <section class="wrapper section-padding news">
-        <div id="offertCarousel" class="carousel slide " data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item carousel-item1 active ">
-                    <img src="./dist/img/main1.jpg" class="w-100" alt="informacje o nowościach">
-                </div>
-                <div class="carousel-item carousel-item2">
-                    <img src="./dist/img/main2.jpg" class="w-100" alt="informacje o nowościach">
-                </div>
-                <div class="carousel-item carousel-item3">
-                    <img src="./dist/img/main3.jpg" class="w-100" alt="informacje o nowościach">
-                </div>
-            </div>
-        </div>
+    <section class="product-page wrapper section-padding">
+        <div class="product-page__main flex-center">
+            <?php
+            echo "<img src='" . $photo_url . "' alt='" . $photo_alt . "' class='product-page__img'>";
+            echo "<div class='product-page__info'>";
+            echo "<h1 class='product-page__name'>" . $name . "</h1>";
+            echo "<p class='product-page__quantiti'>" . $stock_quantity . " sztuk w magazynie</p>";
+            echo "<p>Cena:" . $price . "PLN</p>";
+            echo "<button class='product-page__btn'>Dodaj do koszyka</button>";
+            echo "</div>";
+            echo "</div>";
+            ?>
     </section>
-
-    <section class="section-padding wrapper just-droped">
-        <h2 class="section-title">Just <span>dropped</span></h2>
-        <div class="new-items">
-            <a class="item" href='product.php?product_id=1'>
-                <div class="item__top">
-                    <span class="item__new">new</span>
-                    <img src="./dist/img/new-hoodie-black.png" alt="czarna bluza z nowej kolekcji" class="item__img">
-                </div>
-                <div class="item__bot">
-                    <span class="item__name">BASIC HOODIE (black)</span>
-                    <span class="item__price">499 PLN</span>
-                </div>
-            </a>
-            <a class="item" href='product.php?product_id=7'>
-                <div class="item__top">
-                    <span class="item__new">new</span>
-                    <img src="./dist/img/new-hoodie-blue.png" alt="niebieska bluza z nowej kolekcji" class="item__img">
-                </div>
-                <div class="item__bot">
-                    <span class="item__name">BASIC HOODIE (blue)</span>
-                    <span class="item__price">499 PLN</span>
-                </div>
-            </a>
-            <a class="item" href='product.php?product_id=10'>
-                <div class="item__top">
-                    <span class="item__new">new</span>
-                    <img src="./dist/img/new-hoodie-grey.png" alt="szara bluza z nowej kolekcji" class="item__img">
-                </div>
-                <div class="item__bot">
-                    <span class="item__name">BASIC HOODIE (grey)</span>
-                    <span class="item__price">499 PLN</span>
-                </div>
-            </a>
-            <a class="item" href='product.php?product_id=3'>
-                <div class="item__top">
-                    <span class="item__new">new</span>
-                    <img src="./dist/img/new-hoodie-pink.png" alt="różowa bluza z nowej kolekcji" class="item__img">
-                </div>
-                <div class="item__bot">
-                    <span class="item__name">BASIC HOODIE (pink)</span>
-                    <span class="item__price">499 PLN</span>
-                </div>
-            </a>
-    </section>
-
-    <section class="newsletter-section wrapper section-padding flex-center">
-        <div class="newsletter flex-center">
-            <p class="newsletter__info">Zapisz się do naszego newslettera i odbierz <span>-10%</span> na swoje pierwsze
-                zamówienie!</p>
-            <form class="newsletter__form flex-center">
-                <input type="text" name="name" placeholder="Imię" class="newsletter__input">
-                <input type="email" name="e-mail" placeholder="E-mail" class="newsletter__input">
-                <input type="submit" value="Zapisz mnie" class="newsletter__btn">
-            </form>
-            <a href="./pp.php" class="newsletter__polite">Polityka Prywatności</a>
-        </div>
-    </section>
-
-
-
 
     <footer class="footer section-padding">
         <div class="wrapper footer__content">
@@ -171,7 +133,7 @@
                 </div>
                 <div class="customer-service">
                     <p class="footer__title">Obsługa klienta:</p>
-                    <a href="./pp.php" class="link">Polityka Prywatności</a>
+                    <a href="./polityka_prywatnosci.php" class="link">Polityka Prywatności</a>
                     <a href="./return.php" class="link">Zwroty i reklamacje</a>
                     <a href="./ship.php" class="link">Wysyłka</a>
                 </div>

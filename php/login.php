@@ -32,7 +32,7 @@ if ($result->num_rows == 1) {
         // Ustaw sesję użytkownika
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['user_email'] = $row['email'];
-        header("Location: ../user_panel.php"); // Przekieruj na stronę główną
+        header("Location: ../user_panel.php"); 
     } else {
         echo "Nieprawidłowe hasło.";
     }

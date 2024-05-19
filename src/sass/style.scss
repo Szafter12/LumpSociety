@@ -259,11 +259,7 @@ body {
 
 		&__bot {
 			gap: 0.5em;
-			font-size: 14px;
-		}
-
-		&__price {
-			font-weight: bold;
+			font-size: clamp(1.2rem, 3vw, 1.4rem);
 		}
 	}
 }
@@ -499,7 +495,7 @@ body {
 		.item {
 			&__top {
 				img {
-					height: 300px;
+					height: 250px;
 				}
 			}
 		}
@@ -640,11 +636,18 @@ body {
 		text-align: left;
 	}
 
-	ul,
-	p,
-	tr,
-	ol {
+	table {
+		width: 50%;
+	}
+
+	p {
 		font-size: clamp(1.4rem, 3vw, 1.6rem);
+	}
+
+	tr,
+	ul,
+	ol {
+		font-size: clamp(1rem, 3vw, 1.6rem);
 	}
 
 	thead {
@@ -663,6 +666,44 @@ body {
 
 	img {
 		width: 100%;
+	}
+}
+
+// product-page
+
+.product-page {
+
+	h1 {
+		font-size: clamp(2.2rem,3vw,2.8rem);
+	}
+
+	&__main {
+		flex-direction: column;
+		gap: 5em;
+	}
+
+	&__img {
+		width: 80%;
+		object-fit: cover;
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		font-size: clamp(1.4rem,3vw,1.6rem);
+	}
+
+	&__btn {
+		padding: 1em 0;
+		border-radius: 8px;
+		color: $white-color;
+		background-color: $main-color;
+		transition: background-color 0.3s;
+
+		&:hover {
+			background-color: $secondary-color;
+		}
 	}
 }
 

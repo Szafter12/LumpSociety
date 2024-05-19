@@ -139,15 +139,13 @@
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo "<a href='#' id='" . $row['product_id'] . "'>";
-                    echo "<div class='item'>";
+                    echo "<a class='item' href='product.php?product_id=" . $row['product_id'] . "'>";
                     echo "<div class='item__top'>";
                     echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
                     echo "</div>";
                     echo " <div class='item__bot'>";
                     echo "<span class='item__name'>" . $row['name'] . "</span>";
-                    echo "<span class='item__price'>" . $row['price'] . " PLN</span>";
-                    echo "</div>";
+                    echo "<span class='bold'>" . $row['price'] . " PLN</span>";
                     echo "</div>";
                     echo "</a>";
                 }

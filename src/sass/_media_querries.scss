@@ -47,6 +47,26 @@
 			gap: 0;
 		}
 	}
+
+	.product-page {
+		&__main {
+			flex-direction: row;
+			gap: 10em;
+		}
+
+		&__info {
+			align-self: flex-start;
+		}
+		
+		&__img {
+			width: auto;
+			height: 500px;
+		}
+
+		&__btn {
+			margin-top: 4em;
+		}
+	}
 }
 
 @media (min-width: 992px) {
