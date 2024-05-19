@@ -52,9 +52,9 @@
         <div class="nav__ui">
         <?php
             session_start();
-            if (isset($_SESSION['user_id']) && isset($_SESSION['is_admin'])) {
+            if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] == 1)) {
                 echo "<a href='./admin_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
-            } else if (isset($_SESSION['user_id'])) {
+            } else if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] != 1)) {
                 // Użytkownik jest zalogowany, wyświetl jego profil
                 echo "<a href='./user_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
             } else {
