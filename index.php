@@ -50,7 +50,7 @@
             <a href="./contact.php" class="nav__item">Contact</a>
         </div>
         <div class="nav__ui">
-        <?php
+            <?php
             session_start();
             if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] == 1)) {
                 echo "<a href='./admin_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
@@ -102,46 +102,40 @@
     <section class="section-padding wrapper just-droped">
         <h2 class="section-title">Just <span>dropped</span></h2>
         <div class="new-items">
-            <a class="item" href='product.php?product_id=1'>
-                <div class="item__top">
-                    <span class="item__new">new</span>
-                    <img src="./dist/img/new-hoodie-black.png" alt="czarna bluza z nowej kolekcji" class="item__img">
-                </div>
-                <div class="item__bot">
-                    <span class="item__name">BASIC HOODIE (black)</span>
-                    <span class="bold">499 PLN</span>
-                </div>
-            </a>
-            <a class="item" href='product.php?product_id=7'>
-                <div class="item__top">
-                    <span class="item__new">new</span>
-                    <img src="./dist/img/new-hoodie-blue.png" alt="niebieska bluza z nowej kolekcji" class="item__img">
-                </div>
-                <div class="item__bot">
-                    <span class="item__name">BASIC HOODIE (blue)</span>
-                    <span class="bold">499 PLN</span>
-                </div>
-            </a>
-            <a class="item" href='product.php?product_id=10'>
-                <div class="item__top">
-                    <span class="item__new">new</span>
-                    <img src="./dist/img/new-hoodie-grey.png" alt="szara bluza z nowej kolekcji" class="item__img">
-                </div>
-                <div class="item__bot">
-                    <span class="item__name">BASIC HOODIE (grey)</span>
-                    <span class="bold">499 PLN</span>
-                </div>
-            </a>
-            <a class="item" href='product.php?product_id=3'>
-                <div class="item__top">
-                    <span class="item__new">new</span>
-                    <img src="./dist/img/new-hoodie-pink.png" alt="różowa bluza z nowej kolekcji" class="item__img">
-                </div>
-                <div class="item__bot">
-                    <span class="item__name">BASIC HOODIE (pink)</span>
-                    <span class="bold">499 PLN</span>
-                </div>
-            </a>
+            <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "lump_society";
+
+            // Utworzenie połączenia
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Sprawdzenie połączenia
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            $sql = "SELECT * FROM products ORDER BY add_date DESC LIMIT 4";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<a class='item' href='product.php?product_id=" . $row['product_id'] . "'>";
+                    echo "<div class='item__top'>";
+                    echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
+                    echo "<span class='item__new'>new</span>";
+                    echo "</div>";
+                    echo " <div class='item__bot'>";
+                    echo "<span class='item__name'>" . $row['name'] . "</span>";
+                    echo "<span class='bold'>" . $row['price'] . " PLN</span>";
+                    echo "</div>";
+                    echo "</a>";
+                }
+            } else {
+                echo "<h2>Brak produktów do wyświetlenia</h2>";
+            }
+            ?>
+        </div>
     </section>
 
     <section class="newsletter-section wrapper section-padding flex-center">

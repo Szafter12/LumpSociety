@@ -127,7 +127,6 @@
             if (isset($_GET['category'])) {
                 $category = $_GET['category'];
             } else {
-
                 $category = 'all';
             }
 

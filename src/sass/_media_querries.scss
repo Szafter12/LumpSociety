@@ -20,6 +20,11 @@
 			width: 550px;
 		}
 	}
+	.user-panel {
+		.admin-btns {
+			flex-direction: row;
+		}
+	}
 }
 
 @media (min-width: 768px) {

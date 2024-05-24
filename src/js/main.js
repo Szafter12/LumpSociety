@@ -8,6 +8,20 @@ const cartBtn = document.querySelector('.cart-btn')
 const closeCartBtn = document.querySelector('.close-btn')
 const cart = document.querySelector('.cart')
 const cartBody = document.querySelector('.cart__body')
+const menuSection = document.querySelectorAll('.menu-section')
+const menuTab = document.querySelectorAll('.menu-tab')
+
+const showInfo = id => {
+	menuSection.forEach(section => {
+		section.style.display = 'none'
+	})
+	menuTab.forEach(tab => {
+		tab.classList.remove('menu-tab--active')
+	})
+	document.getElementById(id).style.display = 'block'
+	const currentBtn = document.querySelector(`[data-id=${id}]`)
+	currentBtn.classList.add('menu-tab--active')
+}
 
 const showMobile = () => {
 	navItems.classList.toggle('show-menu')

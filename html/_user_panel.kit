@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta name="description" content="Zaloguj się do swojego panelu urzytkownika">
+    <title>Panel Użytkownika</title>
+    <!-- @include structure-head -->
+
+</head>
+
+<body>
+
+    <!-- @include 'nav-header' -->
+
+
+
+    <section class="wrapper section-padding flex-center">
+        <div class="user-panel flex-center">
+            <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "lump_society";
+
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Sprawdzenie, czy sesja jest ustawiona dla użytkownika
+            if (isset($_SESSION['user_email'])) {
+
+                // Pobranie imienia użytkownika na podstawie danych sesji
+                $email = $_SESSION['user_email'];
+                $sql = "SELECT name FROM users WHERE email='$email'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows == 1) {
+                    // Wyświetlenie imienia użytkownika na stronie
+                    $row = $result->fetch_assoc();
+                    echo "<h1 class='bold'>Witaj " . $row["name"] . "</h1>";
+                } else {
+                    echo "<h1 class='bold'>Błąd podczas pobierania danych użytkownika.</h1>";
+                }
+            } else {
+                header("location: login_page.php");
+            }
+            ?>
+            <a class="bold" href="php/logout.php">Wyloguj się</a>
+        </div>
+    </section>
+
+    <!-- @include 'footer' -->
+
+    <!-- @include 'structure-body' -->
+</body>
+
+</html>

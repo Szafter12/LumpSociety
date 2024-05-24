@@ -49,7 +49,7 @@
             <a href="./contact.php" class="nav__item">Contact</a>
         </div>
         <div class="nav__ui">
-        <?php
+            <?php
             session_start();
             if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] == 1)) {
                 echo "<a href='./admin_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
@@ -106,23 +106,97 @@
                     // Wyświetlenie imienia użytkownika na stronie
                     $row = $result->fetch_assoc();
                     echo "<h1 class='bold'>Witaj " . $row["name"] . "</h1>";
+                    echo "<a href='php/logout.php'>Wyloguj się</a>";
                     echo <<<form
-                    <h2 class="section-title">Dodaj Produkt</h2>
-                    <form action="php/admin.php" method="get" class="login__form">
-                    <input type="text" class="login__input" placeholder="name" name="name" required>
-                    <input type="text" class="login__input" placeholder="price" name="price" required>
-                    <input type="text" class="login__input" placeholder="photo url" name="photo_url" required>
-                    <input type="text" class="login__input" placeholder="photo alt" name="photo_alt" required>
-                    <input type="number" class="login__input" placeholder="stock_quantity" name="stock_quantity" required>
-                    <label for="category">Wybierz kategorie:</label>
-                    <select id="category" name="category">
-                    <option value="tops">tops</option>
-                    <option value="bottoms">bottoms</option>
-                    <option value="accesories">accesories</option>
-                    </select>
-                    <button class="login__btn" type="submit" name="mode" value="dodaj">Dodaj</button>
-                    </form>
+                    <div class="admin-btns">
+                        <button data-id="first-tab" onclick="showInfo('first-tab')" class="login__btn menu-tab menu-tab--active">Dodaj</button>
+                        <button data-id="second-tab" onclick="showInfo('second-tab')" class="login__btn menu-tab">Usuń</button>
+                        <button data-id="third-tab" onclick="showInfo('third-tab')" class="login__btn menu-tab">Modyfikuj</button>
+                    </div>
+                    <div class="menu-section section-padding wrapper" id="first-tab">
+                        <h2 class="section-title">Dodaj Produkt</h2>
+                        <form action="php/admin.php" method="post" class="login__form">
+                            <input type="text" class="login__input" placeholder="name" name="name" required>
+                            <input type="text" class="login__input" placeholder="price" name="price" required>
+                            <input type="text" class="login__input" placeholder="photo url" name="photo_url" required>
+                            <input type="text" class="login__input" placeholder="photo alt" name="photo_alt" required>
+                            <input type="number" class="login__input" placeholder="stock_quantity" name="stock_quantity" required>
+                            <label for="category">Wybierz kategorie:</label>
+                            <select id="category" name="category">
+                                <option value="tops">tops</option>
+                                <option value="bottoms">bottoms</option>
+                                <option value="accesories">accesories</option>
+                            </select>
+                            <button class="login__btn" type="submit" name="add" value="add">Dodaj</button>
+                        </form>
+                        
+                    </div>
+                    <div class="menu-section products section-padding wrapper" id="second-tab" style="display: none">
+                        <h2 class="section-title">Usuń Produkt</h2>
+                        <div class="new-items">
                     form;
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "lump_society";
+
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                    if ($conn->connect_error) {
+                        die("Błąd połączenia: " . $conn->connect_error);
+                    }
+
+                    $sql = "SELECT * FROM products";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<div class='item'>";
+                            echo "<div class='item__top'>";
+                            echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
+                            echo "</div>";
+                            echo " <div class='item__bot'>";
+                            echo "<span class='item__name'>" . $row['name'] . "</span>";
+                            echo "<span class='bold'>" . $row['price'] . " PLN</span>";
+                            echo "</div>";
+                            echo "<form action='php/delete_product.php' method='post'>
+                            <input type='hidden' name='id' value='" . $row['product_id'] . "'>
+                            <input class='item__new' type='submit' value='Usuń'>
+                          </form>";
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "<h2>Brak produktów do wyświetlenia</h2>";
+                    }
+                    echo <<<form
+                        </div>
+                    </div>
+                    <div class="menu-section products section-padding wrapper" id="third-tab" style="display: none">
+                        <h2 class="section-title">Modyfikuj Produkt</h2>
+                        <div class="new-items">
+                    form;
+                    $sql = "SELECT * FROM products";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<div class='item'>";
+                            echo "<div class='item__top'>";
+                            echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
+                            echo "</div>";
+                            echo " <div class='item__bot'>";
+                            echo "<span class='item__name'>" . $row['name'] . "</span>";
+                            echo "<span class='bold'>" . $row['price'] . " PLN</span>";
+                            echo "</div>";
+                            echo "<form action='php/modify_product.php' method='post'>
+                            <input type='hidden' name='id' value='" . $row['product_id'] . "'>
+                            <input class='item__new' type='submit' value='Modyfikuj'>
+                          </form>";
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "<h2>Brak produktów do wyświetlenia</h2>";
+                    }
+                    echo "</div>";
                 } else {
                     echo "<h1 class='bold'>Błąd podczas pobierania danych użytkownika.</h1>";
                 }
@@ -130,7 +204,6 @@
                 header("location: login_page.php");
             }
             ?>
-            <a class="bold" href="php/logout.php">Wyloguj się</a>
         </div>
     </section>
 
