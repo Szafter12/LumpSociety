@@ -469,7 +469,7 @@ body {
 	img {
 		width: 90%;
 		border-radius: 9px;
-		// animation: fadeIn-reverse 0.8s ease-in-out;
+		animation: fadeIn-reverse 0.8s ease-in-out;
 	}
 }
 
@@ -521,6 +521,7 @@ body {
 	&__form {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		gap: 2em;
 		margin-top: 1em;
 		width: 100%;
@@ -530,7 +531,7 @@ body {
 	&__input {
 		align-self: center;
 		padding: 0.3em 0.8em;
-		width: 100%;
+		width: 80%;
 		border: 1px solid $secondary-color;
 		background: none;
 		font-size: clamp(1.4rem, 3vw, 1.6rem);

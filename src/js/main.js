@@ -10,6 +10,25 @@ const cart = document.querySelector('.cart')
 const cartBody = document.querySelector('.cart__body')
 const menuSection = document.querySelectorAll('.menu-section')
 const menuTab = document.querySelectorAll('.menu-tab')
+const msgStatus = document.querySelector('.msgStatus')
+
+if (document.location.search === '?product=added') {
+	msgStatus.classList.add('showMsg')
+	msgStatus.textContent = 'Produkt Dodany'
+
+	setTimeout(() => {
+		msgStatus.classList.remove('showMsg')
+	}, 3000)
+}
+
+if (document.location.search === '?product=deleted') {
+	msgStatus.classList.add('showMsg')
+	msgStatus.textContent = 'Produkt Usunięty'
+
+	setTimeout(() => {
+		msgStatus.classList.remove('showMsg')
+	}, 3000)
+}
 
 const showInfo = id => {
 	menuSection.forEach(section => {

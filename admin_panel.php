@@ -19,6 +19,7 @@
 </head>
 
 <body>
+    <p class='msgStatus'>Produkt pomyślnie dodany</p>
     <div class="info flex-center">
         <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
         <p class="info2">Zamów do 13:00, a Twoje zamówienie zostanie dostarczone w następny dzień roboczy 🚚</p>
@@ -82,8 +83,6 @@
         </div>
     </div>
 
-
-
     <section class="wrapper section-padding flex-center">
         <div class="user-panel flex-center">
             <?php
@@ -115,7 +114,7 @@
                     </div>
                     <div class="menu-section section-padding wrapper" id="first-tab">
                         <h2 class="section-title">Dodaj Produkt</h2>
-                        <form action="php/admin.php" method="post" class="login__form">
+                        <form action="php/add_product.php" method="post" class="login__form">
                             <input type="text" class="login__input" placeholder="name" name="name" required>
                             <input type="text" class="login__input" placeholder="price" name="price" required>
                             <input type="text" class="login__input" placeholder="photo url" name="photo_url" required>

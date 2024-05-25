@@ -7,13 +7,30 @@
 	margin: 0 auto;
 }
 
+.msgStatus {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%) translateY(-100%);
+	padding: 5em;
+	font-size: clamp(1.4rem, 3vw, 1.8rem);
+	background-color: rgb(45, 207, 23);
+	text-align: center;
+	opacity: 0;
+	z-index: 999;
+	transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.showMsg {
+	transform: translateX(-50%) translateY(0);
+	opacity: 1;
+}
+
 .flex-center {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-
-
 
 h1 {
 	font-size: clamp(3rem, 3vw, 4.2rem);

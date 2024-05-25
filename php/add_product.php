@@ -21,7 +21,7 @@ $sql = "INSERT INTO products (name, price, photo_url, photo_alt, stock_quantity,
 VALUES ('$name', '$price', '$photo_url', '$photo_alt', '$stock_quantity', '$category')";
 
 if ($conn->query($sql) === TRUE) {
-    header("location: ../admin_panel.php");
+    header("location: ../admin_panel.php?product=added");
 } else {
     echo "Błąd: " . $sql . "<br>" . $conn->error;
 }
