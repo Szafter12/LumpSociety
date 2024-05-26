@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 25, 2024 at 01:19 AM
+-- Generation Time: Maj 27, 2024 at 12:08 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `lump_society`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`) VALUES
+(11, 15, 1, 1),
+(12, 15, 3, 1),
+(19, 14, 3, 1),
+(21, 16, 12, 1),
+(23, 16, 1, 1),
+(24, 16, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -58,7 +83,7 @@ INSERT INTO `products` (`product_id`, `name`, `price`, `photo_url`, `photo_alt`,
 (14, 'TOTE BAG', 119.00, './dist/img/tote-bag.png', 'TOTE BAG', 12, 'accesories', '2024-05-24'),
 (15, 'WAVY TOTE BAG ', 119.00, './dist/img/wavy-crossbody-tote-bag.png', 'WAVY TOTE BAG ', 7, 'accesories', '2024-05-24'),
 (16, 'WAVY HOODIE (black)', 499.00, './dist/img/wavy-hoodie-black.png', 'WAVY HOODIE (black)', 69, 'tops', '2024-05-24'),
-(25, 'Sosu', 999.99, './dist/img/sliwa.jpg', 'Sosu', 12, 'accesories', '2024-05-25');
+(28, 'Sosu', 999.99, './dist/img/sliwa.jpg', 'Sosu', 12, 'accesories', '2024-05-24');
 
 -- --------------------------------------------------------
 
@@ -80,11 +105,21 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `is_admin`) VALUES
 (5, 'admin', 'admin@admin.pl', '$2y$10$WdlaUIfS3nOYjSIJHjDOHeRC2M7rsIVsWiTBJko8YqIKenotZZljy', 1),
-(14, 'Jakub', 'test@test.com', '$2y$10$uT4AhxMfyduhS8ysqzF4heZ9CPD8jl7UOhYDJqc8fzN9CjBGPmtje', 0);
+(14, 'Szafter3', 'test@test.com', '$2y$10$uT4AhxMfyduhS8ysqzF4heZ9CPD8jl7UOhYDJqc8fzN9CjBGPmtje', 0),
+(15, 'essa', 'essa@essa.pl', '$2y$10$8mTmOJaR0rV4gUxlG6KL.uUMY4Bb3at3gLwZ8Kx/J87To.9recZ7u', 0),
+(16, 'Martynka', 'martynka@m.pl', '$2y$10$JIsdCxMTzzHV.qMLps1WJOvmsfNTXmwlII/Mf0LeCBPav8EhqXXRi', 0);
 
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indeksy dla tabeli `products`
@@ -104,16 +139,33 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
