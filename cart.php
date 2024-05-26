@@ -1,9 +1,27 @@
+<?php
+session_start();
+require 'database_connection.php'; // Plik z połączeniem do bazy danych
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login_page.php');
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+
+$query = $conn->prepare("SELECT products.product_id, products.name, products.price, products.photo_url, products.photo_alt, cart.quantity FROM cart JOIN products ON cart.product_id = products.product_id WHERE cart.user_id = ?");
+$query->bind_param('i', $user_id);
+$query->execute();
+$result = $query->get_result();
+
+$total_price = 0;
+?>
 <!DOCTYPE html>
 <html lang="pl">
 
 <head>
-    <meta name="description" content="Wszytsko o naszej firmie i założycielach">
-    <title>O nas</title>
+    <meta name="description" content="Zaloguj się do swojego panelu urzytkownika">
+    <title>Panel Użytkownika</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Jakub Pachut">
@@ -19,7 +37,6 @@
 </head>
 
 <body>
-
     <div class="info flex-center">
         <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
         <p class="info2">Zamów do 13:00, a Twoje zamówienie zostanie dostarczone w następny dzień roboczy 🚚</p>
@@ -51,7 +68,6 @@
         </div>
         <div class="nav__ui">
             <?php
-            session_start();
             require 'database_connection.php';
             if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] == 1)) {
                 echo "<a href='./admin_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
@@ -69,25 +85,42 @@
     <button class="scroll-up flex-center">
         <i class="fa-solid fa-chevron-up"></i>
     </button>
-    
-    <h1 class="bold">About us</h1>
 
-    <section class="about-us wrapper section-padding flex-center">
-        <div class="text">
-            <p>
-                "Witaj w Lumpsociety - Twoim ulubionym miejscu na zakupy! Jesteśmy pasjonatami mody, którzy nie boją się
-                wyrażać siebie poprzez ubrania. Nasza misja to zapewnienie Tobie wyjątkowych, wysokiej jakości ubrań,
-                które
-                podkreślą Twój indywidualny styl i sprawią, że będziesz czuć się pewnie każdego dnia.
-            </p>
-            <p>
-                W Lumpsociety wierzymy
-                w różnorodność i inkluzję, dlatego nasze kolekcje są dedykowane wszystkim, niezależnie od wieku, płci
-                czy
-                rozmiaru. Dołącz do społeczności Lumpsociety i odkryj swoją modową osobowość już dziś!"
-            </p>
-        </div>
-        <img src="./dist/img/about-us.jpg" alt="zdjecie założycieli lumpsociety">
+    <section class="wrapper section-padding flex-center">
+        <div class="user-panel cart">
+            <a href="#" class="cart__btn cart__btn--a">Przejdź dalej</a>
+            <h1>Koszyk <i class="fa-solid fa-cart-shopping"></i></h1>
+            <div class="products">
+                <div class="new-items">
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<div class='item' href='product.php?product_id=" . $row['product_id'] . "'>";
+                            echo "<div class='item__top'>";
+                            echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
+                            echo "</div>";
+                            echo " <div class='item__bot'>";
+                            echo "<span class='item__name'>" . $row['name'] . "</span>";
+                            echo "<span class='bold'>" . $row['price'] . " PLN</span>";
+                            echo "<span>Ilość: " . $row['quantity'] . "</span>";
+                            echo " <form action='php/remove_from_cart.php' method='POST'>";
+                            echo "  <input type='hidden' name='product_id' value='" . $row['product_id'] . "'>";
+                            echo " <button class='cart__btn' type='submit'>Usuń</button>";
+                            echo " </form>";
+                            echo "</div>";
+                            echo "</div>";
+                            $total_price += $row['price'] * $row['quantity'];
+                        }
+                        echo "</div>";
+                        echo "</div>";
+                        echo "<h2>Łączna cena: " . $total_price . " PLN</h2>";
+                    } else {
+                        echo "</div>";
+                        echo "</div>";
+                        echo "<h2 class='cart__info'>Twój koszyk jest pusty</h2>";
+                    }
+                    ?>
+                </div>
     </section>
 
     <footer class="footer section-padding">

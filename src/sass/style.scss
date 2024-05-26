@@ -599,12 +599,12 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 4em 2em;
+	padding: 3em;
 	width: 100%;
 	min-height: 400px;
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 
-	a {
+	.log-out {
 		position: absolute;
 		top: 20px;
 		right: 20px;
@@ -740,7 +740,7 @@ body {
 
 	&__btn {
 		margin-top: 2em;
-		padding: 1em 0;
+		padding: 1em 2em;
 		border-radius: 8px;
 		color: $white-color;
 		background-color: $main-color;
@@ -783,6 +783,44 @@ body {
 				height: 100%;
 			}
 		}
+	}
+}
+
+// cart
+
+.cart {
+	h1 {
+		align-self: flex-start;
+	}
+
+	img {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+		animation: none;
+	}
+
+	&__btn {
+		padding: 0.5em 1em;
+		background-color: $main-color;
+		cursor: pointer;
+		color: $white-color;
+		border-radius: 8px;
+	}
+
+	&__info {
+		text-align: center;
+	}
+
+	h2 {
+		margin: 2em 0 3em 0;
+		text-align: center;
+	}
+	&__btn--a {
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		padding: 1em 2em;
+		font-size: clamp(1.4rem, 3vw, 1.6rem);
 	}
 }
 

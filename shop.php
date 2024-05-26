@@ -27,20 +27,6 @@
 </head>
 
 <body>
-
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "lump_society";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Błąd połączenia: " . $conn->connect_error);
-    }
-    ?>
-
     <div class="info flex-center">
         <p class="info1 hide">Darmowa dostawa do zamówień powyżej 600 PLN 🚚</p>
         <p class="info2">Zamów do 13:00, a Twoje zamówienie zostanie dostarczone w następny dzień roboczy 🚚</p>
@@ -71,8 +57,9 @@
             <a href="./contact.php" class="nav__item">Contact</a>
         </div>
         <div class="nav__ui">
-        <?php
+            <?php
             session_start();
+            require 'database_connection.php';
             if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] == 1)) {
                 echo "<a href='./admin_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
             } else if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] != 1)) {
@@ -83,26 +70,13 @@
                 echo "<a href='./login_page.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
             }
             ?>
-            <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
+            <a href="cart.php" class="nav__btn cart-btn"><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
     </nav>
     <button class="scroll-up flex-center">
         <i class="fa-solid fa-chevron-up"></i>
     </button>
-    <div class="cart">
-        <div class="cart__body">
-            <button class="close-btn">
-                <div class="line1"></div>
-                <div class="line2"></div>
-            </button>
-            <div class="cart__inside wrapper section-padding">
-                <h2 class="section-title">Koszyk <i class="fa-solid fa-cart-shopping"></i></h2>
-                <div class="cart__content ">
-                    <p class="cart__info">twój koszyk jest pusty</p>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <?php
 
     if (isset($_GET['category'])) {
@@ -150,7 +124,7 @@
                     echo "</a>";
                 }
             } else {
-                echo "Brak produktów do wyświetlenia.";
+                echo "<h2>Brak produktów do wyświetlenia</h2>";
             }
             ?>
         </div>

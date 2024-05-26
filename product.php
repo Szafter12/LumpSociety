@@ -2,22 +2,17 @@
 if (isset($_GET['product_id'])) {
     $id = $_GET['product_id'];
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "lump_society";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    require 'database_connection.php';
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT name, price, photo_url, photo_alt, stock_quantity  FROM products WHERE product_id = ?";
+    $sql = "SELECT product_id, name, price, photo_url, photo_alt, stock_quantity  FROM products WHERE product_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
-    $stmt->bind_result($name, $price, $photo_url, $photo_alt, $stock_quantity);
+    $stmt->bind_result($id, $name, $price, $photo_url, $photo_alt, $stock_quantity);
     $stmt->fetch();
     $stmt->close();
     $conn->close();
@@ -76,7 +71,7 @@ if (isset($_GET['product_id'])) {
             <a href="./contact.php" class="nav__item">Contact</a>
         </div>
         <div class="nav__ui">
-        <?php
+            <?php
             session_start();
             if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] == 1)) {
                 echo "<a href='./admin_panel.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
@@ -88,26 +83,12 @@ if (isset($_GET['product_id'])) {
                 echo "<a href='./login_page.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
             }
             ?>
-            <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
+           <a href="cart.php" class="nav__btn cart-btn"><i class="fa-solid fa-cart-shopping"></i></a>
     </nav>
     <button class="scroll-up flex-center">
         <i class="fa-solid fa-chevron-up"></i>
     </button>
-    <div class="cart">
-        <div class="cart__body">
-            <button class="close-btn">
-                <div class="line1"></div>
-                <div class="line2"></div>
-            </button>
-            <div class="cart__inside wrapper section-padding">
-                <h2 class="section-title">Koszyk <i class="fa-solid fa-cart-shopping"></i></h2>
-                <div class="cart__content ">
-                    <p class="cart__info">twój koszyk jest pusty</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
+   
     <section class="product-page wrapper section-padding">
         <div class="product-page__main flex-center">
             <?php
@@ -116,7 +97,11 @@ if (isset($_GET['product_id'])) {
             echo "<h1 class='product-page__name'>" . $name . "</h1>";
             echo "<p class='product-page__quantiti'>" . $stock_quantity . " sztuk w magazynie</p>";
             echo "<p>Cena: <span class='bold'>" . $price . "PLN</span></p>";
-            echo "<button class='product-page__btn'>Dodaj do koszyka</button>";
+            echo "<form action='php/add_to_cart.php' method='POST'>";
+            echo "<input type='hidden' name='product_id' value='" . $id . "'>";
+            echo "<button class='product-page__btn' type='submit'>Dodaj do koszyka
+            </button>";
+            echo "</form>";
             echo "</div>";
             echo "</div>";
             ?>
@@ -154,7 +139,6 @@ if (isset($_GET['product_id'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="./dist/js/main.min.js"></script>
-    <script src="./dist/js/carousel.min.js"></script>
 </body>
 
 </html>

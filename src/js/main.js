@@ -4,10 +4,6 @@ const scrollBox = document.querySelector('.scroll-up')
 const info1 = document.querySelector('.info1')
 const info2 = document.querySelector('.info2')
 const year = document.querySelector('.year')
-const cartBtn = document.querySelector('.cart-btn')
-const closeCartBtn = document.querySelector('.close-btn')
-const cart = document.querySelector('.cart')
-const cartBody = document.querySelector('.cart__body')
 const menuSection = document.querySelectorAll('.menu-section')
 const menuTab = document.querySelectorAll('.menu-tab')
 const msgStatus = document.querySelector('.msgStatus')
@@ -70,19 +66,7 @@ const setYear = () => {
 	year.textContent = currentYear
 }
 
-const showCart = () => {
-	cart.classList.add('show-cart')
-	cartBody.classList.add('show-cartBody')
-}
-
-const closeCart = () => {
-	cart.classList.remove('show-cart')
-	cartBody.classList.remove('show-cartBody')
-}
-
 burgerBtn.addEventListener('click', showMobile)
 window.addEventListener('scroll', showScrollBox)
 scrollBox.addEventListener('click', () => window.scrollTo({ top: 0 }))
-cartBtn.addEventListener('click', showCart)
-closeCartBtn.addEventListener('click', closeCart)
 setYear()

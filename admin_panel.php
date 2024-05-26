@@ -62,37 +62,18 @@
                 echo "<a href='./login_page.php' class='nav__btn login-btn'><i class='fa-solid fa-user'></i></a>";
             }
             ?>
-            <button class="nav__btn cart-btn" aria-label="cart"><i class="fa-solid fa-cart-shopping"></i></button>
+            <a href="cart.php" class="nav__btn cart-btn"><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
     </nav>
     <button class="scroll-up flex-center">
         <i class="fa-solid fa-chevron-up"></i>
     </button>
-    <div class="cart">
-        <div class="cart__body">
-            <button class="close-btn">
-                <div class="line1"></div>
-                <div class="line2"></div>
-            </button>
-            <div class="cart__inside wrapper section-padding">
-                <h2 class="section-title">Koszyk <i class="fa-solid fa-cart-shopping"></i></h2>
-                <div class="cart__content ">
-                    <p class="cart__info">twój koszyk jest pusty</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <section class="wrapper section-padding flex-center">
         <div class="user-panel flex-center">
             <?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "lump_society";
 
-            $conn = new mysqli($servername, $username, $password, $dbname);
-
+            require 'database_connection.php';
             // Sprawdzenie, czy sesja jest ustawiona dla użytkownika
             if (isset($_SESSION['user_email']) && ($_SESSION['is_admin'] == 1)) {
 
@@ -105,7 +86,7 @@
                     // Wyświetlenie imienia użytkownika na stronie
                     $row = $result->fetch_assoc();
                     echo "<h1 class='bold'>Witaj " . $row["name"] . "</h1>";
-                    echo "<a href='php/logout.php'>Wyloguj się</a>";
+                    echo "<a class='log-out' href='php/logout.php'>Wyloguj się</a>";
                     echo <<<form
                     <div class="admin-btns">
                         <button data-id="first-tab" onclick="showInfo('first-tab')" class="login__btn menu-tab menu-tab--active">Dodaj</button>
@@ -134,12 +115,7 @@
                         <h2 class="section-title">Usuń Produkt</h2>
                         <div class="new-items">
                     form;
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "lump_society";
-
-                    $conn = new mysqli($servername, $username, $password, $dbname);
+                    require 'database_connection.php';
 
                     if ($conn->connect_error) {
                         die("Błąd połączenia: " . $conn->connect_error);
