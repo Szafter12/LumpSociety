@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 27, 2024 at 12:08 AM
+-- Generation Time: Cze 02, 2024 at 03:00 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -41,10 +41,14 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`) VALUES
 (11, 15, 1, 1),
 (12, 15, 3, 1),
-(19, 14, 3, 1),
-(21, 16, 12, 1),
-(23, 16, 1, 1),
-(24, 16, 3, 1);
+(27, 14, 28, 1),
+(28, 14, 4, 1),
+(30, 16, 3, 1),
+(31, 16, 4, 1),
+(32, 16, 5, 1),
+(33, 16, 7, 1),
+(34, 16, 9, 1),
+(35, 14, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +146,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `products`
