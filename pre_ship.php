@@ -33,7 +33,15 @@ $total_price = 0;
     <script src="https://kit.fontawesome.com/97392591bc.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./dist/css/style.min.css">
-
+    <style>
+        label {
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.5em;
+        }
+    </style>
 </head>
 
 <body>
@@ -87,40 +95,57 @@ $total_price = 0;
     </button>
 
     <section class="wrapper section-padding flex-center">
-        <div class="user-panel cart">
-            <a href="./pre_ship.php" class="cart__btn cart__btn--a">Przejdź dalej</a>
-            <h1>Koszyk <i class="fa-solid fa-cart-shopping"></i></h1>
-            <div class="products">
-                <div class="new-items">
-                    <?php
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<div class='item' href='product.php?product_id=" . $row['product_id'] . "'>";
-                            echo "<div class='item__top'>";
-                            echo "<img src='" . $row['photo_url'] . "' alt='" . $row['name'] . "'>";
-                            echo "</div>";
-                            echo " <div class='item__bot'>";
-                            echo "<span class='item__name'>" . $row['name'] . "</span>";
-                            echo "<span class='bold'>" . $row['price'] . " PLN</span>";
-                            echo "<span>Ilość: " . $row['quantity'] . "</span>";
-                            echo " <form action='php/remove_from_cart.php' method='POST'>";
-                            echo "  <input type='hidden' name='product_id' value='" . $row['product_id'] . "'>";
-                            echo " <button class='cart__btn' type='submit'>Usuń</button>";
-                            echo " </form>";
-                            echo "</div>";
-                            echo "</div>";
-                            $total_price += $row['price'] * $row['quantity'];
-                        }
-                        echo "</div>";
-                        echo "</div>";
-                        echo "<h2>Łączna cena: " . $total_price . " PLN</h2>";
-                    } else {
-                        echo "</div>";
-                        echo "</div>";
-                        echo "<h2 class='cart__info'>Twój koszyk jest pusty</h2>";
-                    }
-                    ?>
-                </div>
+        <div class="user-panel">
+            <a href="#" class="cart__btn cart__btn--a">Zamawiam</a>
+            <h1>Dane Zamówienia</h1>
+            <div class="delivery">
+                <form action="php/addUser.php" method="post" class="login__form">
+                    <input type="text" class="login__input" placeholder="adres1" name="adres1" required>
+                    <input type="text" class="login__input" placeholder="Adres2" name="adres2" required>
+                    <input type="text" class="login__input" placeholder="Miejscowość" name="twon" required>
+                    <input type="text" class="login__input" placeholder="Kod pocztowy" name="post-code" required>
+                    <br><br>
+                    <h2>Przesyłka</h2>
+                    <label>
+                        <input type="radio" name="delivery-option" value="Inpost Paczkomaty 24/7">
+                        <p>Inpost Paczkomaty 24/7 (11.99zł)</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="delivery-option" value="Kurdier DPD">
+                        <p>Kurier DPD (16.99zł)</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="delivery-option" value="Przesyłka Pocztowa">
+                        <p>Przesyłka Pocztowa (12.49zł)</p>
+                    </label>
+                    <br><br>
+                    <h2>Płatność</h2>
+
+                    <label>
+                        <input type="radio" name="payment" value="Tradicional">
+                        <p>Tradycyjny Przelew Bankowy</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment" value="PayU">
+                        <p>Szybka Płatność Bankowa/Blik</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment" value="OnDelivery">
+                        <p>Płatność Przy Odbiorze</p>
+                    </label>
+                </form>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
     </section>
 
     <footer class="footer section-padding">
