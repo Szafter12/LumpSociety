@@ -12,7 +12,7 @@
 <p align="center">To view the demo you need to go to the link provided below</p>
 <br><br>
 
-<a href='http://lumpsociety.infinityfreeapp.com/'>View demo</a>
+<a align="center" href='http://lumpsociety.infinityfreeapp.com/'>View demo</a>
 
 <br><br>
 
