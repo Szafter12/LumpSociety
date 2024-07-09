@@ -56,4 +56,4 @@ MySQL
 
 Jakub Pachut - jakubpachut@gmail.com
 
-Project Link: [https://github.com/Szafter12/Mechanik-school-site](https://github.com/Szafter12/GitHub-app)
+Project Link: https://github.com/Szafter12/LumpSociety
