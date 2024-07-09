@@ -12,7 +12,10 @@
 <p align="center">To view the demo you need to go to the link provided below</p>
 <br><br>
 
-<a align="center" href='http://lumpsociety.infinityfreeapp.com/'>View demo</a>
+<p align="center">
+  <a href='http://lumpsociety.infinityfreeapp.com/'>View demo</a>
+</p>
+
 
 <br><br>
 
@@ -24,7 +27,11 @@
 
 <img src='dist/img/example2.png'>
 <img src='dist/img/example1.png'>
-[View a video](dist/img/lumpsociety.mp4)
+<video width="320" height="240" controls>
+  <source src="dist/img/lumpsociety.mp4" type="video/mp4">
+</video>
+
+<br><br>
 
 <p align="center">
 The website was made based on the hills.com website design the product images are from hills.com and I have no rights to them PROJECT IS FOR EXERCISE PURPOSE ONLY. 
