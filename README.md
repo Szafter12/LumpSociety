@@ -19,10 +19,6 @@
 
 <br><br>
 
-<p align="center">Password to admin panel:</p>
-<p align="center">Email: admin@admin.pl</p>
-<p align="center">Password: admin</p>
-
 ## About The Project
 
 <img src='dist/img/example2.png'>
