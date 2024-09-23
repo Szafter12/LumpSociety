@@ -15,6 +15,7 @@ As far as the design is concerned, I modelled it on the existing Hills shop. Lik
 ## Screenshots
 
 ![App Screenshot](./dist/img/example2.png)
+![App Screenshot](./dist/img/example1.png)
 
 
 ## Features
