@@ -1,55 +1,39 @@
-<div align="center">
-<h1 align="center">Lump Society</h1>
+# LumpSociety
 
-<p align="center">
- This is a page made as part of a credit project for school. The site depicts the fictional store LumpSociety 
-</p>
-</div>
-
-<br><br>
-
-## How to start  
-<p align="center">To view the demo you need to go to the link provided below</p>
-<br><br>
-
-<p align="center">
-  <a href='http://lumpsociety.infinityfreeapp.com/'>View demo</a>
-</p>
+This is a project of a fictional e-commerce store, which was a credit project in technical school. Store was created by using PHP and MySql. Project created on my own. Thanks to this project, I learned a lot when it comes to combining the backend with the frontend, and thanks to it I mastered the PHP and SQL language to a very good degree. 
 
 
-<br><br>
+## Demo
 
-## About The Project
-
-<img src='dist/img/example2.png'>
-<img src='dist/img/example1.png'>
-<video width="320" height="240" controls>
-  <source src="dist/img/lumpsociety.mp4" type="video/mp4">
-</video>
-
-<br><br>
-
-<p align="center">
-The website was made based on the hills.com website design the product images are from hills.com and I have no rights to them PROJECT IS FOR EXERCISE PURPOSE ONLY. 
-lumpsociety is a clothing store where users can create an account log in, add items to cart and order them. The store also has a simple admin panel. 
-</p>
+http://lumpsociety.infinityfreeapp.com/
 
 
+## Appendix
 
-### Built With
+As far as the design is concerned, I modelled it on the existing Hills shop. Likewise, the clothing graphics are from that shop and I have no rights to them. I only used them for learning purposes. Website in Polish.
 
-HTML
-<br>
-SCSS(bootstrap 5.3)
-<br>
-JavaScript
-<br>
-PHP
-<br>
-MySQL
 
-## Contact
+## Features
 
-Jakub Pachut - jakubpachut@gmail.com
+- Products dynamically added from the database
+- Adding products to cart 
+- Login and Registration
+- Deleting products from cart
+- User panel
+- Automatic calculation of cart price
+- Sorting products by category
+- Responsive design
+- Modern design   
+- Admin panel (but I cannot give access to it because it allows to deleting products from the database.)
 
-Project Link: https://github.com/Szafter12/LumpSociety
+
+## Tech Stack
+
+**Client:** JavaScript, HTML, SCSS, bootstrap 5.3
+
+**Server:** PHP, MySQL
+
+
+## Authors
+
+- [@Jakub Pachut](https://www.github.com/Szafter12)
