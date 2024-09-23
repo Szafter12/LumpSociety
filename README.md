@@ -12,6 +12,10 @@ http://lumpsociety.infinityfreeapp.com/
 
 As far as the design is concerned, I modelled it on the existing Hills shop. Likewise, the clothing graphics are from that shop and I have no rights to them. I only used them for learning purposes. Website in Polish.
 
+## Screenshots
+
+![App Screenshot](./dist/img/example2.png)
+
 
 ## Features
 
