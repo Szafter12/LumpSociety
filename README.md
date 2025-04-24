@@ -1,6 +1,6 @@
 # LumpSociety
 
-This is a project of a fictional e-commerce store, which was a credit project in technical school. Store was created by using PHP and MySql. Project created on my own. Thanks to this project, I learned a lot when it comes to combining the backend with the frontend, and thanks to it I mastered the PHP and SQL language to a very good degree. 
+This is a project of a fictional e-commerce store, which was a credit project in technical school. Store was created by using PHP and MySql.
 
 ## Demo
 
